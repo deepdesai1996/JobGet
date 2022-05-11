@@ -19,6 +19,7 @@
 		73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CF282A1ED1000D41AC /* View+Extensions.swift */; };
 		73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBB7282B354B005A896F /* TotalsView.swift */; };
 		73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */; };
+		73F1EBBF282B73E0005A896F /* FinancialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		73D476CF282A1ED1000D41AC /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		73F1EBB7282B354B005A896F /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
 		73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeTableView.swift; sourceTree = "<group>"; };
+		73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 		73D476C9282A18B1000D41AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				73F1EBBD282B73C0005A896F /* CustomTableViewCells */,
 				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
 				73F1EBB7282B354B005A896F /* TotalsView.swift */,
 				73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */,
@@ -166,6 +169,14 @@
 				73D476CF282A1ED1000D41AC /* View+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		73F1EBBD282B73C0005A896F /* CustomTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */,
+			);
+			path = CustomTableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 				73D4769E282A0187000D41AC /* MainViewController.swift in Sources */,
 				73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */,
 				73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */,
+				73F1EBBF282B73E0005A896F /* FinancialsTableViewCell.swift in Sources */,
 				73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */,
 				73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */,
 				73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */,

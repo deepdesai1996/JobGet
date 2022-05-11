@@ -9,12 +9,21 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    
-    
     private let addTransactionView = AddTransactionView()
     private let totalsView = TotalsView()
     
-    private let tableView = ContentSizedTableView()
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.clipsToBounds = true
+        table.backgroundColor = .white
+        table.separatorStyle = .none
+        table.layer.cornerRadius = 10
+        table.sectionIndexColor = .black
+        table.style
+        
+        return table
+    }()
     
     
     override func viewDidLoad() {
@@ -60,23 +69,23 @@ class MainViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             tableView.topAnchor.constraint(equalTo: totalsView.safeAreaLayoutGuide.bottomAnchor, constant: 16),
-            //tableView.bottomAnchor.constraint(equalTo: addTransactionView.safeAreaLayoutGuide.topAnchor, constant: -16)
+            tableView.bottomAnchor.constraint(equalTo: addTransactionView.safeAreaLayoutGuide.topAnchor)
         ])
     }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Test"
+        let cell = FinancialsTableViewCell()
         cell.selectionStyle = .none
         return cell
     }

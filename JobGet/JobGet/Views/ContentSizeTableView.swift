@@ -26,7 +26,6 @@ final class ContentSizedTableView: UITableView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.clipsToBounds = true
         self.backgroundColor = .white
-        self.layer.borderWidth = 1
         self.separatorColor = .black
         self.layer.cornerRadius = 10
         self.sectionIndexColor = .black
