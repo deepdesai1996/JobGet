@@ -17,8 +17,7 @@ class AddTransactionView: UIView {
         button.layer.cornerRadius = button.frame.size.width/2
         button.clipsToBounds = true
         
-        let plusImage = UIImage(systemName: "plus",
-                                withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .medium))
+        let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .medium))
         
         button.setImage(plusImage, for: .normal)
         button.tintColor = .black
