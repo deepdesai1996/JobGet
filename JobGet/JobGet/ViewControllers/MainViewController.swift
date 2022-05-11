@@ -8,10 +8,13 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
     
-    let addTransactionView = AddTransactionView()
-    let totalsView = TotalsView()
+    
+    
+    private let addTransactionView = AddTransactionView()
+    private let totalsView = TotalsView()
+    
+    private let tableView = ContentSizedTableView()
     
     
     override func viewDidLoad() {
@@ -24,13 +27,17 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         
         addTransactionView.translatesAutoresizingMaskIntoConstraints = false
-        
         totalsView.translatesAutoresizingMaskIntoConstraints = false
-        totalsView.layer.borderWidth = 2
+        
+        totalsView.layer.borderWidth = 1
         totalsView.layer.cornerRadius = 10
         
         view.addSubview(totalsView)
         view.addSubview(addTransactionView)
+        view.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     
@@ -48,7 +55,29 @@ class MainViewController: UIViewController {
             totalsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             totalsView.heightAnchor.constraint(equalToConstant: 150)
         ])
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            tableView.topAnchor.constraint(equalTo: totalsView.safeAreaLayoutGuide.bottomAnchor, constant: 16),
+            //tableView.bottomAnchor.constraint(equalTo: addTransactionView.safeAreaLayoutGuide.topAnchor, constant: -16)
+        ])
     }
-
 }
 
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "Test"
+        cell.selectionStyle = .none
+        return cell
+    }
+}

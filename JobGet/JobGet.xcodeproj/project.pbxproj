@@ -18,6 +18,7 @@
 		73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CC282A18DD000D41AC /* AddTransactionView.swift */; };
 		73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CF282A1ED1000D41AC /* View+Extensions.swift */; };
 		73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBB7282B354B005A896F /* TotalsView.swift */; };
+		73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		73D476CC282A18DD000D41AC /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		73D476CF282A1ED1000D41AC /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		73F1EBB7282B354B005A896F /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
+		73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
 				73F1EBB7282B354B005A896F /* TotalsView.swift */,
+				73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */,
 				73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */,
 				73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */,
+				73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
