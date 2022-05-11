@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
         table.separatorStyle = .none
         table.layer.cornerRadius = 10
         table.sectionIndexColor = .black
-        table.style
         
         return table
     }()
@@ -30,6 +29,12 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         configureViews()
         addConstraints()
+        
+        addTransactionView.addTransactionButton.addTarget(self, action:#selector(addTransaction(sender:)), for: .touchUpInside)
+    }
+    
+    @objc func addTransaction(sender: UIButton){
+      print("Test")
     }
     
     private func configureViews() {
@@ -51,16 +56,10 @@ class MainViewController: UIViewController {
     
     
     private func addConstraints() {
-        NSLayoutConstraint.activate([
-            addTransactionView.widthAnchor.constraint(equalToConstant: 50),
-            addTransactionView.heightAnchor.constraint(equalToConstant: 50),
-            addTransactionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
-            addTransactionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24)
-        ])
         
         NSLayoutConstraint.activate([
-            totalsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            totalsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            totalsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            totalsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
             totalsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             totalsView.heightAnchor.constraint(equalToConstant: 150)
         ])
@@ -68,8 +67,15 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            tableView.topAnchor.constraint(equalTo: totalsView.safeAreaLayoutGuide.bottomAnchor, constant: 16),
-            tableView.bottomAnchor.constraint(equalTo: addTransactionView.safeAreaLayoutGuide.topAnchor)
+            tableView.topAnchor.constraint(equalTo: totalsView.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: addTransactionView.safeAreaLayoutGuide.topAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            addTransactionView.widthAnchor.constraint(equalToConstant: 50),
+            addTransactionView.heightAnchor.constraint(equalToConstant: 50),
+            addTransactionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
+            addTransactionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -26)
         ])
     }
 }

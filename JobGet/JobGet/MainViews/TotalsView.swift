@@ -166,6 +166,14 @@ class TotalsView: UIView {
         UIColor.black.setStroke()
         firstSeperator?.stroke()
         secondSeperator?.stroke()
-        
+    }
+    
+    
+    //lines are redrawn when rotating device
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setNeedsDisplay()
+        addConstraints()
     }
 }

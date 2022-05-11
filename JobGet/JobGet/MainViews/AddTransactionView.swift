@@ -10,7 +10,7 @@ import UIKit
 
 class AddTransactionView: UIView {
     
-    private let addTransactionButton: UIButton = {
+    let addTransactionButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderWidth = 1
@@ -22,6 +22,7 @@ class AddTransactionView: UIView {
         button.setImage(plusImage, for: .normal)
         button.tintColor = .black
         button.setTitleColor(.black, for: .normal)
+
         return button
     }()
     

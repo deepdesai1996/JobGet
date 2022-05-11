@@ -84,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73B7FB27282C751B00C00AF6 /* CustomTableViews */ = {
+			isa = PBXGroup;
+			children = (
+				73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */,
+			);
+			path = CustomTableViews;
+			sourceTree = "<group>";
+		};
 		73D4768D282A0187000D41AC = {
 			isa = PBXGroup;
 			children = (
@@ -107,12 +115,12 @@
 		73D47698282A0187000D41AC /* JobGet */ = {
 			isa = PBXGroup;
 			children = (
-				73D476CE282A1EC1000D41AC /* Extensions */,
-				73D476CB282A18C1000D41AC /* Models */,
-				73D476CA282A18B8000D41AC /* ViewControllers */,
-				73D476C9282A18B1000D41AC /* Views */,
 				73D47699282A0187000D41AC /* AppDelegate.swift */,
 				73D4769B282A0187000D41AC /* SceneDelegate.swift */,
+				73D476CB282A18C1000D41AC /* Models */,
+				73D476CA282A18B8000D41AC /* ViewControllers */,
+				73D476C9282A18B1000D41AC /* MainViews */,
+				73D476CE282A1EC1000D41AC /* Extensions */,
 				73D476A2282A0188000D41AC /* Assets.xcassets */,
 				73D476A4282A0188000D41AC /* LaunchScreen.storyboard */,
 				73D476A7282A0188000D41AC /* Info.plist */,
@@ -137,15 +145,15 @@
 			path = JobGetUITests;
 			sourceTree = "<group>";
 		};
-		73D476C9282A18B1000D41AC /* Views */ = {
+		73D476C9282A18B1000D41AC /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
-				73F1EBBD282B73C0005A896F /* CustomTableViewCells */,
-				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
 				73F1EBB7282B354B005A896F /* TotalsView.swift */,
-				73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */,
+				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
+				73B7FB27282C751B00C00AF6 /* CustomTableViews */,
+				73F1EBBD282B73C0005A896F /* CustomTableViewCells */,
 			);
-			path = Views;
+			path = MainViews;
 			sourceTree = "<group>";
 		};
 		73D476CA282A18B8000D41AC /* ViewControllers */ = {

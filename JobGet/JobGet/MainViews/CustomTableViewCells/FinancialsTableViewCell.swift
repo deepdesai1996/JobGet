@@ -30,14 +30,13 @@ class FinancialsTableViewCell: UITableViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            tableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             //tableView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
-    
 }
 
 extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
