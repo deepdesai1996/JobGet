@@ -13,7 +13,8 @@ class TransactionViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "TEST"
+        label.text = "Add Transaction"
+        label.textAlignment = .center
         
         return label
     }()
@@ -36,6 +37,8 @@ class TransactionViewController: UIViewController {
     
     private lazy var stack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
         
         return stack
     }()
@@ -51,6 +54,8 @@ class TransactionViewController: UIViewController {
         view.frame = UIScreen.main.bounds
         view.addSubview(container)
         
+        container.addSubview(stack)
+        
         NSLayoutConstraint.activate([
             container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
@@ -59,6 +64,13 @@ class TransactionViewController: UIViewController {
             container.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
             
         ])
+        
+        NSLayoutConstraint.activate([
+            stack.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            stack.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.5)
+        ])
+        stack.pinToSuperView(view: container)
         
         container.layer.borderWidth = 1
     }

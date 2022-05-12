@@ -152,7 +152,6 @@
 			children = (
 				73F1EBB7282B354B005A896F /* TotalsView.swift */,
 				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
-				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
 				73B7FB27282C751B00C00AF6 /* TableViews */,
 				73F1EBBD282B73C0005A896F /* TableViewCells */,
 			);
@@ -163,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				73D4769D282A0187000D41AC /* MainViewController.swift */,
+				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
