@@ -5,12 +5,24 @@
 //  Created by Deep Desai on 2022-05-09.
 //
 
+import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
     
-    private let addTransactionView = AddTransactionView()
-    private let totalsView = TotalsView()
+    private let addTransactionView: AddTransactionView = {
+        let addTransactionView = AddTransactionView()
+        addTransactionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return addTransactionView
+    }()
+    
+    private let totalsView: TotalsView = {
+        let totalsView = TotalsView()
+        totalsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return totalsView
+    }()
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -24,24 +36,27 @@ class MainViewController: UIViewController {
         return table
     }()
     
+    private let transactionViewController: TransactionViewController = {
+        let transactionViewController = TransactionViewController()
+        transactionViewController.modalPresentationStyle = .overCurrentContext
+        transactionViewController.modalTransitionStyle = .crossDissolve
+        
+        return transactionViewController
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
         addConstraints()
-        
-        addTransactionView.addTransactionButton.addTarget(self, action:#selector(addTransaction(sender:)), for: .touchUpInside)
     }
     
     @objc func addTransaction(sender: UIButton){
-      print("Test")
+      present(transactionViewController, animated: true)
     }
     
     private func configureViews() {
         view.backgroundColor = .white
-        
-        addTransactionView.translatesAutoresizingMaskIntoConstraints = false
-        totalsView.translatesAutoresizingMaskIntoConstraints = false
         
         totalsView.layer.borderWidth = 1
         totalsView.layer.cornerRadius = 10
@@ -52,6 +67,8 @@ class MainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        addTransactionView.addTransactionButton.addTarget(self, action:#selector(addTransaction(sender:)), for: .touchUpInside)
     }
     
     
@@ -87,7 +104,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
