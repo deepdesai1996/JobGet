@@ -75,7 +75,7 @@ class TransactionViewController: UIViewController {
     private let addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemGray3
+        button.backgroundColor = .systemGray6
         button.setTitle("Add", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 1

@@ -45,7 +45,7 @@ extension DropdownView: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = dropDownOptions[indexPath.row]
         cell.textLabel?.textAlignment = .center
         cell.layer.borderWidth = 0.5
-        cell.backgroundColor = .systemGray3
+        cell.backgroundColor = .systemGray6
         
         return cell
     }
