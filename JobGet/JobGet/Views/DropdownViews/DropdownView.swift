@@ -49,7 +49,7 @@ extension DropdownView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.dropDownPressed(string: dropDownOptions[indexPath.row])
+        self.delegate?.dropDownPressed(title: dropDownOptions[indexPath.row])
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -10,6 +10,14 @@ import UIKit
 
 class TransactionViewController: UIViewController {
     
+    private let container: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -27,16 +35,49 @@ class TransactionViewController: UIViewController {
         dropdown.setTitleColor(.black, for: .normal)
         dropdown.setTitle("Transaction Type", for: .normal)
         
+        let image = UIImage(systemName: "arrowtriangle.down.square.fill")
+        dropdown.tintColor = .gray
+        
+        dropdown.setImage(image, for: .normal)
+        
+        dropdown.configuration = .plain()
+        dropdown.configuration?.imagePlacement = .trailing
+        dropdown.configuration?.imagePadding = 2
+        
         return dropdown
     }()
     
-    private let container: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-
-        return view
+    private let transactionDescription: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textView
     }()
+    
+    private let transactionValue: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textView
+    }()
+    
+    private let addButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .red
+        label.text = "Test"
+        label.textAlignment = .left
+        
+        return label
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +88,10 @@ class TransactionViewController: UIViewController {
         
         view.addSubview(container)
         container.addSubview(titleLabel)
-        container.addSubview(transactionDropdown)
+//        container.addSubview(transactionDropdown)
+//        container.addSubview(transactionDescription)
+//        container.addSubview(transactionValue)
+//        container.addSubview(addButton)
         
         view.frame = UIScreen.main.bounds
         
@@ -61,9 +105,15 @@ class TransactionViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            transactionDropdown.heightAnchor.constraint(equalToConstant: 50),
-            transactionDropdown.widthAnchor.constraint(equalToConstant: 300)
+            titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 10)
         ])
+        
+        NSLayoutConstraint.activate([
+            transactionDropdown.heightAnchor.constraint(equalToConstant: 50),
+            transactionDropdown.widthAnchor.constraint(equalToConstant: 210)
+        ])
+        
         
         container.layer.borderWidth = 1
         

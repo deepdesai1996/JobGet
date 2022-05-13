@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol dropDownProtocol {
-    func dropDownPressed(string: String)
+    func dropDownPressed(title: String)
 }
 
 class DropdownButton: UIButton, dropDownProtocol {
@@ -63,8 +63,8 @@ class DropdownButton: UIButton, dropDownProtocol {
         }
     }
     
-    internal func dropDownPressed(string: String) {
-        self.setTitle(string, for: .normal)
+    internal func dropDownPressed(title: String) {
+        self.setTitle(title, for: .normal)
         dismissDropDown()
     }
     
