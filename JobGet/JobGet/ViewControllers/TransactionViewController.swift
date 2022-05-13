@@ -10,7 +10,9 @@ import UIKit
 
 class TransactionViewController: UIViewController {
     
-    private let container: UIView = {
+    var delegate: dropDownProtocol?
+    
+    let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -36,7 +38,7 @@ class TransactionViewController: UIViewController {
         dropdown.setTitle("Transaction Type", for: .normal)
         
         let image = UIImage(systemName: "arrowtriangle.down.square.fill")
-        dropdown.tintColor = .gray
+        dropdown.tintColor = .systemGray3
         
         dropdown.setImage(image, for: .normal)
         
@@ -47,23 +49,37 @@ class TransactionViewController: UIViewController {
         return dropdown
     }()
     
-    private let transactionDescription: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
+    private let transactionDescription: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 5
+        textField.textAlignment = .center
+        textField.placeholder = "Transaction Description"
         
-        return textView
+        return textField
     }()
     
-    private let transactionValue: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
+    private let transactionValue: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderWidth = 1
+        textField.textAlignment = .center
+        textField.layer.cornerRadius = 5
         
-        return textView
+        
+        textField.placeholder = "$"
+        return textField
     }()
     
     private let addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemGray3
+        button.setTitle("Add", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
         
         return button
     }()
@@ -88,10 +104,11 @@ class TransactionViewController: UIViewController {
         
         view.addSubview(container)
         container.addSubview(titleLabel)
-//        container.addSubview(transactionDropdown)
-//        container.addSubview(transactionDescription)
-//        container.addSubview(transactionValue)
-//        container.addSubview(addButton)
+        container.addSubview(transactionDropdown)
+        container.addSubview(transactionDescription)
+        container.addSubview(transactionValue)
+        container.addSubview(transactionDropdown.dropView)
+        container.addSubview(addButton)
         
         view.frame = UIScreen.main.bounds
         
@@ -100,7 +117,7 @@ class TransactionViewController: UIViewController {
             container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
             container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             container.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            container.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
+            container.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35)
             
         ])
         
@@ -110,8 +127,38 @@ class TransactionViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            transactionDropdown.heightAnchor.constraint(equalToConstant: 50),
-            transactionDropdown.widthAnchor.constraint(equalToConstant: 210)
+            transactionDropdown.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            transactionDropdown.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            transactionDropdown.heightAnchor.constraint(equalToConstant: 40),
+            transactionDropdown.widthAnchor.constraint(equalToConstant: 210),
+        ])
+        
+        NSLayoutConstraint.activate([
+            transactionDescription.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            transactionDescription.topAnchor.constraint(equalTo: transactionDropdown.bottomAnchor, constant: 20),
+            transactionDropdown.heightAnchor.constraint(equalToConstant: 40),
+            transactionDropdown.widthAnchor.constraint(equalToConstant: 210),
+        ])
+        
+        NSLayoutConstraint.activate([
+            transactionDescription.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            transactionDescription.topAnchor.constraint(equalTo: transactionDropdown.bottomAnchor, constant: 20),
+            transactionDescription.heightAnchor.constraint(equalToConstant: 40),
+            transactionDescription.widthAnchor.constraint(equalToConstant: 210),
+        ])
+        
+        NSLayoutConstraint.activate([
+            transactionValue.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            transactionValue.topAnchor.constraint(equalTo: transactionDescription.bottomAnchor, constant: 20),
+            transactionValue.heightAnchor.constraint(equalToConstant: 40),
+            transactionValue.widthAnchor.constraint(equalToConstant: 210 / 2),
+        ])
+        
+        NSLayoutConstraint.activate([
+            addButton.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            addButton.topAnchor.constraint(equalTo: transactionValue.bottomAnchor, constant: 25),
+            addButton.heightAnchor.constraint(equalToConstant: 40),
+            addButton.widthAnchor.constraint(equalToConstant: 210 / 1.5),
         ])
         
         
@@ -120,5 +167,4 @@ class TransactionViewController: UIViewController {
         transactionDropdown.dropView.dropDownOptions.append("Expense")
         transactionDropdown.dropView.dropDownOptions.append("Income")
     }
-    
 }

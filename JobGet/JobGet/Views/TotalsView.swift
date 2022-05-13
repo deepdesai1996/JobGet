@@ -80,7 +80,7 @@ class TotalsView: UIView {
         progressView.clipsToBounds = true
         progressView.layer.borderWidth = 1
         progressView.trackTintColor = .white
-        progressView.tintColor = .lightGray
+        progressView.tintColor = .systemGray3
         progressView.layer.cornerRadius = progressView.frame.size.height * 3
         progressView.setProgress(0.57, animated: true)
         return progressView
