@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
+protocol AddTransactionDelegate {
+    func addTransactionInfo(type: String?, description: String?, value: Double)
+}
+
+
 class TransactionViewController: UIViewController {
     
-    var delegate: dropDownProtocol?
+    var delegate: AddTransactionDelegate?
     
     let container: UIView = {
         let view = UIView()
@@ -102,6 +107,8 @@ class TransactionViewController: UIViewController {
     
     private func configureViews() {
         
+        addButton.addTarget(self, action:#selector(inputTransaction(sender:)), for: .touchUpInside)
+        
         view.addSubview(container)
         container.addSubview(titleLabel)
         container.addSubview(transactionDropdown)
@@ -166,5 +173,15 @@ class TransactionViewController: UIViewController {
         
         transactionDropdown.dropView.dropDownOptions.append("Expense")
         transactionDropdown.dropView.dropDownOptions.append("Income")
+    }
+    
+    @objc func inputTransaction(sender: UIButton){
+        
+        guard let tValueString = transactionValue.text else { return }
+        guard let tValue = Double(tValueString) else { return }
+        
+
+        delegate?.addTransactionInfo(type: transactionDropdown.titleLabel?.text, description: transactionDescription.text, value: tValue)
+        self.dismiss(animated: true)
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-protocol dropDownProtocol {
+protocol DropDownDelegate {
     func dropDownPressed(title: String)
 }
 
-class DropdownButton: UIButton, dropDownProtocol {
+class DropdownButton: UIButton, DropDownDelegate {
     
     internal let dropView = DropdownView()
     private var height = NSLayoutConstraint()

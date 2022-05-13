@@ -13,7 +13,7 @@ class DropdownView: UIView {
     internal var dropDownOptions = [String]()
     internal let tableView = UITableView()
     
-    var delegate: dropDownProtocol?
+    var delegate: DropDownDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

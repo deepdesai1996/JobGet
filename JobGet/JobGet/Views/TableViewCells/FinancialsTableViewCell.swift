@@ -11,6 +11,9 @@ import UIKit
 class FinancialsTableViewCell: UITableViewCell {
     
     internal let tableView = ContentSizedTableView()
+    private var type: String?
+    private var transactionDescription: String?
+    private var value: Double  = 0
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,6 +46,14 @@ class FinancialsTableViewCell: UITableViewCell {
             //tableView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
+    
+    internal func addData(type: String?, description: String?, value: Double){
+        self.type = type
+        self.transactionDescription = description
+        self.value = value
+    }
+    
+
 }
 
 extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
@@ -56,12 +67,14 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell()
+       
+        let cell = FinancialDetailTableViewCell()
         cell.selectionStyle = .none
-        cell.textLabel?.text = "test"
         cell.layer.borderWidth = 0.5
         
+        cell.titleLabel.text = self.transactionDescription
+        cell.secondaryLabel.text = String(format: "%.2f", self.value)
+
         return cell
     }
     

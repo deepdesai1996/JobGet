@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, AddTransactionDelegate  {
+    
+    private var type: String?
+    private var transactionDescription: String?
+    private var value: Double = 0
+
     
     private let addTransactionView: AddTransactionView = {
         let addTransactionView = AddTransactionView()
@@ -52,7 +57,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func addTransaction(sender: UIButton){
-      present(transactionViewController, animated: true)
+        transactionViewController.delegate = self
+        present(transactionViewController, animated: true)
     }
     
     private func configureViews() {
@@ -95,6 +101,14 @@ class MainViewController: UIViewController {
             addTransactionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -26)
         ])
     }
+    
+    func addTransactionInfo(type: String?, description: String?, value: Double) {
+        self.type = type
+        self.transactionDescription = description
+        self.value = value
+        
+        tableView.reloadData()
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -110,6 +124,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = FinancialsTableViewCell()
         cell.selectionStyle = .none
+        cell.addData(type: self.type, description: self.transactionDescription, value: self.value)
         return cell
     }
     

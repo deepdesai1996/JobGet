@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7341E808282DE7E900469C2D /* DropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341E807282DE7E900469C2D /* DropDownButton.swift */; };
 		7341E80A282DE80600469C2D /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341E809282DE80600469C2D /* DropdownView.swift */; };
+		735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */; };
 		73B7FB2B282CAD6500C00AF6 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */; };
 		73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D47699282A0187000D41AC /* AppDelegate.swift */; };
 		73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D4769B282A0187000D41AC /* SceneDelegate.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		7341E807282DE7E900469C2D /* DropDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownButton.swift; sourceTree = "<group>"; };
 		7341E809282DE80600469C2D /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
+		735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialDetailTableViewCell.swift; sourceTree = "<group>"; };
 		73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		73D47696282A0187000D41AC /* JobGet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobGet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D47699282A0187000D41AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */,
+				735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */,
 				7341E808282DE7E900469C2D /* DropDownButton.swift in Sources */,
 				73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */,
+				735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */,
 				73F1EBBF282B73E0005A896F /* FinancialsTableViewCell.swift in Sources */,
 				7341E80A282DE80600469C2D /* DropdownView.swift in Sources */,
 				73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */,
