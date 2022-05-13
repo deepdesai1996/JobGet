@@ -10,7 +10,7 @@ import UIKit
 
 class FinancialsTableViewCell: UITableViewCell {
     
-    private let tableView = ContentSizedTableView(frame: CGRect(x: 0, y: 0, width: 50, height: 50), style: .insetGrouped)
+    internal let tableView = ContentSizedTableView()
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -18,10 +18,16 @@ class FinancialsTableViewCell: UITableViewCell {
         addSubview(tableView)
         addConstraints()
         
+        tableView.tableHeaderView?.isHidden = true
+        tableView.tableFooterView?.isHidden = true
+        
+        tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 1
+        tableView.separatorStyle = .none
         
         tableView.dataSource = self
         tableView.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -54,8 +60,9 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
         cell.textLabel?.text = "test"
-
+        cell.layer.borderWidth = 0.5
         
         return cell
     }
+    
 }
