@@ -52,6 +52,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func addTransaction(sender: UIButton){
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.blue.cgColor
       present(transactionViewController, animated: true)
     }
     

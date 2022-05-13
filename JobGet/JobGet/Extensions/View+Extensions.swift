@@ -10,12 +10,12 @@ import UIKit
 
 extension UIView {
     
-    func pinToSuperView(view: UIView) {
+    func pinToSuperView(superView: UIView) {
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: self.topAnchor),
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            self.topAnchor.constraint(equalTo: superView.topAnchor),
+            self.bottomAnchor.constraint(equalTo: superView.bottomAnchor),
+            self.leadingAnchor.constraint(equalTo: superView.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: superView.trailingAnchor)
         ])
     }
     

@@ -19,12 +19,15 @@ class TransactionViewController: UIViewController {
         return label
     }()
     
-    private let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "TEST2"
+    internal var transactionDropdown: DropdownButton = {
+        let dropdown = DropdownButton.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        dropdown.translatesAutoresizingMaskIntoConstraints = false
+        dropdown.layer.borderWidth = 1
+        dropdown.layer.cornerRadius = 5
+        dropdown.setTitleColor(.black, for: .normal)
+        dropdown.setTitle("Transaction Type", for: .normal)
         
-        return label
+        return dropdown
     }()
     
     private let container: UIView = {
@@ -35,26 +38,18 @@ class TransactionViewController: UIViewController {
         return view
     }()
     
-    private lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        
-        return stack
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.frame = UIScreen.main.bounds
-        view.addSubview(container)
         configureViews()
     }
     
     private func configureViews() {
-        view.frame = UIScreen.main.bounds
-        view.addSubview(container)
         
-        container.addSubview(stack)
+        view.addSubview(container)
+        container.addSubview(titleLabel)
+        container.addSubview(transactionDropdown)
+        
+        view.frame = UIScreen.main.bounds
         
         NSLayoutConstraint.activate([
             container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -66,13 +61,14 @@ class TransactionViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-            stack.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.5)
+            transactionDropdown.heightAnchor.constraint(equalToConstant: 50),
+            transactionDropdown.widthAnchor.constraint(equalToConstant: 300)
         ])
-        stack.pinToSuperView(view: container)
         
         container.layer.borderWidth = 1
+        
+        transactionDropdown.dropView.dropDownOptions.append("Expense")
+        transactionDropdown.dropView.dropDownOptions.append("Income")
     }
     
 }

@@ -30,7 +30,7 @@ class AddTransactionView: UIView {
         super.init(frame: frame)
         addSubview(addTransactionButton)
         
-        pinToSuperView(view: addTransactionButton)
+        addTransactionButton.pinToSuperView(superView: self)
     }
     
     required init?(coder: NSCoder) {
