@@ -10,6 +10,11 @@
 		7341E808282DE7E900469C2D /* DropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341E807282DE7E900469C2D /* DropDownButton.swift */; };
 		7341E80A282DE80600469C2D /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341E809282DE80600469C2D /* DropdownView.swift */; };
 		735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */; };
+		735F80D52831A397009993D7 /* FinancialModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 735F80D32831A397009993D7 /* FinancialModel.xcdatamodeld */; };
+		735F80D82831A729009993D7 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80D62831A729009993D7 /* Transaction+CoreDataClass.swift */; };
+		735F80D92831A729009993D7 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80D72831A729009993D7 /* Transaction+CoreDataProperties.swift */; };
+		735F80DD2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80DB2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift */; };
+		735F80DE2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80DC2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift */; };
 		73B7FB2B282CAD6500C00AF6 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */; };
 		73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D47699282A0187000D41AC /* AppDelegate.swift */; };
 		73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D4769B282A0187000D41AC /* SceneDelegate.swift */; };
@@ -47,6 +52,11 @@
 		7341E807282DE7E900469C2D /* DropDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownButton.swift; sourceTree = "<group>"; };
 		7341E809282DE80600469C2D /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 		735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialDetailTableViewCell.swift; sourceTree = "<group>"; };
+		735F80D42831A397009993D7 /* FinancialModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FinancialModel.xcdatamodel; sourceTree = "<group>"; };
+		735F80D62831A729009993D7 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		735F80D72831A729009993D7 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		735F80DB2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupedDate+CoreDataClass.swift"; sourceTree = "<group>"; };
+		735F80DC2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupedDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		73D47696282A0187000D41AC /* JobGet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobGet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D47699282A0187000D41AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +111,24 @@
 			path = DropdownViews;
 			sourceTree = "<group>";
 		};
+		735F80DA2831A753009993D7 /* FinancialItem */ = {
+			isa = PBXGroup;
+			children = (
+				735F80D62831A729009993D7 /* Transaction+CoreDataClass.swift */,
+				735F80D72831A729009993D7 /* Transaction+CoreDataProperties.swift */,
+			);
+			path = FinancialItem;
+			sourceTree = "<group>";
+		};
+		735F80DF2831B30A009993D7 /* GroupedDate */ = {
+			isa = PBXGroup;
+			children = (
+				735F80DB2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift */,
+				735F80DC2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift */,
+			);
+			path = GroupedDate;
+			sourceTree = "<group>";
+		};
 		73B7FB27282C751B00C00AF6 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +164,6 @@
 				73D4769B282A0187000D41AC /* SceneDelegate.swift */,
 				73D476CB282A18C1000D41AC /* Models */,
 				73D476CA282A18B8000D41AC /* ViewControllers */,
-				73D476C9282A18B1000D41AC /* Views */,
 				73D476CE282A1EC1000D41AC /* Extensions */,
 				73D476A2282A0188000D41AC /* Assets.xcassets */,
 				73D476A4282A0188000D41AC /* LaunchScreen.storyboard */,
@@ -179,6 +206,7 @@
 			children = (
 				73D4769D282A0187000D41AC /* MainViewController.swift */,
 				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
+				73D476C9282A18B1000D41AC /* Views */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +214,9 @@
 		73D476CB282A18C1000D41AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				735F80D32831A397009993D7 /* FinancialModel.xcdatamodeld */,
+				735F80DF2831B30A009993D7 /* GroupedDate */,
+				735F80DA2831A753009993D7 /* FinancialItem */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -337,8 +368,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				735F80D92831A729009993D7 /* Transaction+CoreDataProperties.swift in Sources */,
 				73D4769E282A0187000D41AC /* MainViewController.swift in Sources */,
+				735F80DE2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift in Sources */,
+				735F80DD2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift in Sources */,
 				73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */,
+				735F80D82831A729009993D7 /* Transaction+CoreDataClass.swift in Sources */,
 				7341E808282DE7E900469C2D /* DropDownButton.swift in Sources */,
 				73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */,
 				735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */,
@@ -349,6 +384,7 @@
 				73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */,
 				73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */,
 				73B7FB2B282CAD6500C00AF6 /* TransactionViewController.swift in Sources */,
+				735F80D52831A397009993D7 /* FinancialModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +710,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		735F80D32831A397009993D7 /* FinancialModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				735F80D42831A397009993D7 /* FinancialModel.xcdatamodel */,
+			);
+			currentVersion = 735F80D42831A397009993D7 /* FinancialModel.xcdatamodel */;
+			path = FinancialModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 73D4768E282A0187000D41AC /* Project object */;
 }

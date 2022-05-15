@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController, AddTransactionDelegate  {
+class MainViewController: UIViewController {
     
     private var type: String?
     private var transactionDescription: String?
     private var value: Double = 0
+    
+    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    private var transactions = [Transaction]()
+    private var dateGroups = [GroupedDate]()
 
     
     private let addTransactionView: AddTransactionView = {
@@ -54,10 +58,10 @@ class MainViewController: UIViewController, AddTransactionDelegate  {
         super.viewDidLoad()
         configureViews()
         addConstraints()
+        GetTransactionsAndGroups()
     }
     
     @objc func addTransaction(sender: UIButton){
-        transactionViewController.delegate = self
         present(transactionViewController, animated: true)
     }
     
@@ -101,31 +105,65 @@ class MainViewController: UIViewController, AddTransactionDelegate  {
             addTransactionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -26)
         ])
     }
-    
-    func addTransactionInfo(type: String?, description: String?, value: Double) {
-        self.type = type
-        self.transactionDescription = description
-        self.value = value
-        
-        tableView.reloadData()
-    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        
+        return dateGroups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = FinancialsTableViewCell()
         cell.selectionStyle = .none
-        cell.addData(type: self.type, description: self.transactionDescription, value: self.value)
+        
+        var cellTransactions = [Transaction]()
+        
+        for item in transactions {
+            if dateGroups[indexPath.row].date == item.itemDate {
+                cellTransactions.append(item)
+            }
+        }
+        
+        cell.addData(transactions: cellTransactions)
         return cell
     }
+    
+}
+
+extension MainViewController {
+
+    //Core Date Functions
+    
+    private func GetTransactionsAndGroups() {
+        guard let newContext = context else { return }
+        
+        do {
+            transactions = try newContext.fetch(Transaction.fetchRequest())
+            dateGroups = try newContext.fetch(GroupedDate.fetchRequest())
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        } catch {
+            print("Unable to fetch transactions and/or group dates: \(error).")
+        }
+        
+    }
+    
+    private func deleteTransaction(item: Transaction) {
+        
+        guard let newContext = context else { return }
+        newContext.delete(item)
+        
+        do {
+            try newContext.save()
+        } catch {
+            print("Unable to delete specified item: \(error)")
+        }
+    }
+    
     
 }

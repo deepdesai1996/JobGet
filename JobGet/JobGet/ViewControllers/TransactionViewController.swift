@@ -8,16 +8,13 @@
 import Foundation
 import UIKit
 
-protocol AddTransactionDelegate {
-    func addTransactionInfo(type: String?, description: String?, value: Double)
-}
-
-
 class TransactionViewController: UIViewController {
     
-    var delegate: AddTransactionDelegate?
+    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    private var groupedDateModels = [GroupedDate]()
+    private var transactionType: Bool = true
     
-    let container: UIView = {
+    private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -103,6 +100,7 @@ class TransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
+        getDateGroups()
     }
     
     private func configureViews() {
@@ -179,9 +177,69 @@ class TransactionViewController: UIViewController {
         
         guard let tValueString = transactionValue.text else { return }
         guard let tValue = Double(tValueString) else { return }
+        guard let tDescription = transactionDescription.text else { return }
         
-
-        delegate?.addTransactionInfo(type: transactionDropdown.titleLabel?.text, description: transactionDescription.text, value: tValue)
+        if transactionDropdown.titleLabel?.text == "Expense" {
+            transactionType = false
+        }
+        
+        let date = Date()
+        
+        createTransaction(itemType: transactionType, itemDescription: transactionDescription.text ?? tDescription, itemValue: tValue, itemDate: date)
+        
         self.dismiss(animated: true)
+    }
+}
+
+extension TransactionViewController {
+    
+    //Core Data Transactions
+    
+    private func getDateGroups() {
+        do {
+            guard let newContext = context else { return }
+            groupedDateModels = try newContext.fetch(GroupedDate.fetchRequest())
+            
+            
+        } catch {
+            print("Unable to fetch GroupedDates: \(error).")
+        }
+        
+    }
+    
+    func createTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: Date) {
+        
+        guard let newContext = context else { return }
+        
+        for groupedDates in groupedDateModels {
+            
+            if groupedDates.date != itemDate {
+                let newGroupedDate = GroupedDate(context: newContext)
+                newGroupedDate.date = itemDate
+            }
+        }
+        
+        
+        
+        let newTransaction = Transaction(context: newContext)
+        
+        newTransaction.itemType = itemType
+        newTransaction.itemDescription = itemDescription
+        
+        if itemType == true {
+            newTransaction.itemValue = itemValue
+        } else {
+            newTransaction.itemValue = -itemValue
+        }
+        
+        newTransaction.itemDate = itemDate
+        
+        
+        
+        do {
+            try newContext.save()
+        } catch {
+            print("Unable to create new item: \(error)")
+        }
     }
 }

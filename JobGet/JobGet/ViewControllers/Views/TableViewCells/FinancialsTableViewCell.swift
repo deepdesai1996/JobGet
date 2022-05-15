@@ -14,6 +14,7 @@ class FinancialsTableViewCell: UITableViewCell {
     private var type: String?
     private var transactionDescription: String?
     private var value: Double  = 0
+    private var transactions = [Transaction]()
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,14 +44,11 @@ class FinancialsTableViewCell: UITableViewCell {
             tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             tableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            //tableView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
-    internal func addData(type: String?, description: String?, value: Double){
-        self.type = type
-        self.transactionDescription = description
-        self.value = value
+    internal func addData(transactions: [Transaction]){
+        self.transactions = transactions
     }
     
 
@@ -59,11 +57,8 @@ class FinancialsTableViewCell: UITableViewCell {
 extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        
+        return transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,8 +67,8 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.layer.borderWidth = 0.5
         
-        cell.titleLabel.text = self.transactionDescription
-        cell.secondaryLabel.text = String(format: "%.2f", self.value)
+        cell.titleLabel.text = self.transactions[indexPath.row].itemDescription
+        cell.secondaryLabel.text = String(format: "%.2f", self.transactions[indexPath.row].itemValue)
 
         return cell
     }
