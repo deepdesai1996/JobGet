@@ -8,7 +8,16 @@
 import UIKit
 
 class FinancialViewController: UIViewController {
-
+    
+    internal let tableView = ContentSizedTableView()
+    private var type: String?
+    private var transactionDescription: String?
+    private var value: Double  = 0
+    private var transactions = [Transaction]()
+    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    internal var parentVC: MainViewController?
+    private var dateGroup: GroupedDate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -23,14 +32,6 @@ class FinancialViewController: UIViewController {
         tableView.delegate = self
     }
     
-    internal let tableView = ContentSizedTableView()
-    private var type: String?
-    private var transactionDescription: String?
-    private var value: Double  = 0
-    private var transactions = [Transaction]()
-    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-    internal var parentVC: MainViewController?
-
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
@@ -41,12 +42,11 @@ class FinancialViewController: UIViewController {
         ])
     }
     
-    internal func addData(transactions: [Transaction], parentVC: MainViewController){
+    internal func addData(transactions: [Transaction], parentVC: MainViewController, dateGroup: GroupedDate){
         self.transactions = transactions
         self.parentVC = parentVC
+        self.dateGroup = dateGroup
     }
-    
-
 }
 
 extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
@@ -81,7 +81,10 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
                 label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
             ])
 
-            label.text = transactions[section].itemDate
+            if !transactions.isEmpty {
+                label.text = transactions[section].itemDate
+            }
+           
 
             return view
         }
@@ -97,20 +100,35 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
         sheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
             
             guard let transaction = self?.transactions[indexPath.row] else { return }
-            self?.deleteTransaction(transaction: transaction)
+            guard let date = self?.dateGroup else { return }
+            self?.deleteTransaction(transaction: transaction, dateGroup: date)
+            self?.parentVC?.dismissal()
         }))
         
         parentVC?.present(sheet, animated: true)
         
     }
     
-    private func deleteTransaction(transaction: Transaction) {
+    private func deleteTransaction(transaction: Transaction, dateGroup: GroupedDate) {
+        
         context?.delete(transaction)
         
         do {
             try context?.save()
         } catch {
             print("Unable to Delete Transaction: \(error)")
+        }
+        
+        let result = transactions.filter { $0.itemDate == dateGroup.date}
+        
+        if result.isEmpty {
+            context?.delete(dateGroup)
+            
+            do {
+                try context?.save()
+            } catch {
+                print("Unable to Delete Transaction: \(error)")
+            }
         }
     }
 

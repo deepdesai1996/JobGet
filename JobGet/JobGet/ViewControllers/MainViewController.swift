@@ -33,7 +33,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         return totalsView
     }()
     
-    private var tableView: UITableView = {
+    internal var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.clipsToBounds = true
@@ -117,16 +117,12 @@ class MainViewController: UIViewController, DismissalDelegate {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return dateGroups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.layoutIfNeeded()
-        
-        cell.selectionStyle = .none
-        
+    
         let financialVC = FinancialViewController()
         self.addChild(financialVC)
         cell.contentView.addSubview(financialVC.view)
@@ -137,18 +133,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         var cellTransactions = [Transaction]()
         
-        for item in transactions {
-            if dateGroups[indexPath.row].date == item.itemDate {
-                cellTransactions.append(item)
+        if !dateGroups.isEmpty {
+            for item in transactions {
+                if dateGroups[indexPath.row].date == item.itemDate {
+                    cellTransactions.append(item)
+                }
             }
+            financialVC.addData(transactions: cellTransactions, parentVC: self, dateGroup: dateGroups[indexPath.row])
         }
         
-        financialVC.addData(transactions: cellTransactions, parentVC: self)
         
         financialVC.view.pinToSuperView(superView: cell.contentView)
         
         financialVC.didMove(toParent: self)
         financialVC.view.layoutIfNeeded()
+        
         
         return cell
     }
@@ -176,21 +175,10 @@ extension MainViewController {
         
     }
     
-    private func deleteTransaction(item: Transaction) {
-        
-        guard let newContext = context else { return }
-        newContext.delete(item)
-        
-        do {
-            try newContext.save()
-        } catch {
-            print("Unable to delete specified item: \(error)")
-        }
-    }
-    
     func dismissal() {
         tableView.reloadData()
         applyTotals()
+        getTransactionsAndGroups()
     }
     
     func applyTotals() {

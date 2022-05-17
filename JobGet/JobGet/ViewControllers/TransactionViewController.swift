@@ -83,6 +83,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.minimumValue = 0.00
         stepper.tintColor = .black
+        stepper.stepValue = 1
         
         var newtransform = CGAffineTransform.identity
         newtransform = newtransform.rotated(by: -(.pi / 2))
@@ -256,7 +257,9 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func transactionValueChange(sender: UIStepper){
-        transactionValue.text = String(sender.value)
+      //  guard let value = Double(transactionValue.text ?? "0") else { return }
+      
+        transactionValue.text = String(stepper.value)
     }
     
     func setParent(parentVC: MainViewController){
@@ -291,7 +294,7 @@ extension TransactionViewController {
     
     
     func addGroupDate(itemDate: String) {
-        getDateGroups()
+      //  getDateGroups()
         
         guard let newContext = context else { return }
         let newGroupedDate = GroupedDate(context: newContext)

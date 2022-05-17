@@ -205,8 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				73D4769D282A0187000D41AC /* MainViewController.swift */,
-				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
 				738C9FFC28335D5B00B0AB1A /* FinancialViewController.swift */,
+				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
 				73D476C9282A18B1000D41AC /* Views */,
 			);
 			path = ViewControllers;
