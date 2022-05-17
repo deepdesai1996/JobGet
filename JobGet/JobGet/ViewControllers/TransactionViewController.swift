@@ -301,7 +301,7 @@ extension TransactionViewController {
             try newContext.save()
             
         } catch {
-            print("Unable to create new item: \(error)")
+            print("Unable to create new GroupDate: \(error)")
         }
     }
     
@@ -330,7 +330,7 @@ extension TransactionViewController {
             parentVC?.getTransactionsAndGroups()
             getDateGroups()
         } catch {
-            print("Unable to create new item: \(error)")
+            print("Unable to create new Transaction: \(error)")
         }
     }
 }

@@ -122,10 +122,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = FinancialsTableViewCell()
+        let cell = UITableViewCell()
+        cell.layoutIfNeeded()
         
         cell.selectionStyle = .none
-    
+        
+        let financialVC = FinancialViewController()
+        self.addChild(financialVC)
+        cell.contentView.addSubview(financialVC.view)
+        
+        
+        
+        financialVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
         var cellTransactions = [Transaction]()
         
         for item in transactions {
@@ -134,7 +143,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        cell.addData(transactions: cellTransactions)
+        financialVC.addData(transactions: cellTransactions, parentVC: self)
+        
+        financialVC.view.pinToSuperView(superView: cell.contentView)
+        
+        financialVC.didMove(toParent: self)
+        financialVC.view.layoutIfNeeded()
+        
         return cell
     }
     

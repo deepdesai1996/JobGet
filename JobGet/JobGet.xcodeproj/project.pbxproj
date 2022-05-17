@@ -15,6 +15,7 @@
 		735F80D92831A729009993D7 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80D72831A729009993D7 /* Transaction+CoreDataProperties.swift */; };
 		735F80DD2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80DB2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift */; };
 		735F80DE2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F80DC2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift */; };
+		738C9FFD28335D5B00B0AB1A /* FinancialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C9FFC28335D5B00B0AB1A /* FinancialViewController.swift */; };
 		73B7FB2B282CAD6500C00AF6 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */; };
 		73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D47699282A0187000D41AC /* AppDelegate.swift */; };
 		73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D4769B282A0187000D41AC /* SceneDelegate.swift */; };
@@ -28,7 +29,6 @@
 		73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CF282A1ED1000D41AC /* View+Extensions.swift */; };
 		73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBB7282B354B005A896F /* TotalsView.swift */; };
 		73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */; };
-		73F1EBBF282B73E0005A896F /* FinancialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +57,7 @@
 		735F80D72831A729009993D7 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		735F80DB2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupedDate+CoreDataClass.swift"; sourceTree = "<group>"; };
 		735F80DC2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupedDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		738C9FFC28335D5B00B0AB1A /* FinancialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialViewController.swift; sourceTree = "<group>"; };
 		73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		73D47696282A0187000D41AC /* JobGet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobGet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D47699282A0187000D41AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		73D476CF282A1ED1000D41AC /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		73F1EBB7282B354B005A896F /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
 		73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeTableView.swift; sourceTree = "<group>"; };
-		73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +206,7 @@
 			children = (
 				73D4769D282A0187000D41AC /* MainViewController.swift */,
 				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
+				738C9FFC28335D5B00B0AB1A /* FinancialViewController.swift */,
 				73D476C9282A18B1000D41AC /* Views */,
 			);
 			path = ViewControllers;
@@ -232,7 +233,6 @@
 		73F1EBBD282B73C0005A896F /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				73F1EBBE282B73E0005A896F /* FinancialsTableViewCell.swift */,
 				735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */,
 			);
 			path = TableViewCells;
@@ -374,10 +374,10 @@
 				735F80DD2831B2FA009993D7 /* GroupedDate+CoreDataClass.swift in Sources */,
 				73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */,
 				735F80D82831A729009993D7 /* Transaction+CoreDataClass.swift in Sources */,
+				738C9FFD28335D5B00B0AB1A /* FinancialViewController.swift in Sources */,
 				7341E808282DE7E900469C2D /* DropDownButton.swift in Sources */,
 				73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */,
 				735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */,
-				73F1EBBF282B73E0005A896F /* FinancialsTableViewCell.swift in Sources */,
 				7341E80A282DE80600469C2D /* DropdownView.swift in Sources */,
 				73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */,
 				73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */,
