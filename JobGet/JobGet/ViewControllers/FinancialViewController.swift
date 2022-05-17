@@ -106,6 +106,8 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
             self?.deleteTransaction(transaction: transaction, dateGroup: date)
             
             self?.parentVC?.getTransactionsAndGroups()
+            self?.parentVC?.applyTotals()
+            self?.parentVC?.reloadInputViews()
         }))
         
         parentVC?.present(sheet, animated: true)

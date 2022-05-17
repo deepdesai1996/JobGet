@@ -16,7 +16,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var groupedDateModels = [GroupedDate]()
-    private var transactionType: Bool = true
+    private var transactionType: Bool?
     internal var dismissalDelegate: DismissalDelegate?
     internal var parentVC: MainViewController?
     private var initialStepperValue: Double = 0
@@ -108,16 +108,6 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         button.layer.cornerRadius = 5
         
         return button
-    }()
-    
-    private let errorLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .red
-        label.text = "Test"
-        label.textAlignment = .left
-        
-        return label
     }()
     
     private let dollarLabel: UILabel = {
@@ -238,6 +228,8 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
             transactionType = false
         } else if transactionDropdown.titleLabel?.text == "Income" {
             transactionType = true
+        } else {
+            transactionType = nil
         }
         
         let calendar = Calendar.current
@@ -254,12 +246,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
 
         let formattedDate = "\(day!) \(dateFormatter.string(from: date))"
         
-        
-        createTransaction(itemType: transactionType, itemDescription: tDescription, itemValue: tValue, itemDate: formattedDate)
-        
-        self.dismiss(animated: true, completion: {
-            self.dismissalDelegate?.dismissal()
-        })
+        validateUserInputs(transactionType: transactionType, transactionDescription: tDescription, transactionValue: tValue, transactionDate: formattedDate)
     
     }
     
@@ -283,6 +270,9 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     }
     
 }
+
+
+// MARK: - TransactionVC Data Handling
 
 extension TransactionViewController {
     
@@ -351,5 +341,46 @@ extension TransactionViewController {
         } catch {
             print("Unable to create new Transaction: \(error)")
         }
+    }
+}
+
+// MARK: - TransactionVC Validation Handling
+
+extension TransactionViewController {
+    
+    private func validateUserInputs(transactionType: Bool?, transactionDescription: String, transactionValue: Double, transactionDate: String) {
+        
+        var message: String = ""
+        
+        if transactionType == nil {
+            message += "Please select an appropriate transactionType."
+        } else if transactionDescription.isEmpty {
+            message += "Please enter a description."
+        } else if transactionValue <= 0 {
+            message += "please enter a value greater than 0."
+        }
+        
+        if message == "" {
+            guard let transactionType = transactionType else {
+                return
+            }
+
+            createTransaction(itemType: transactionType, itemDescription: transactionDescription, itemValue: transactionValue, itemDate: transactionDate)
+            
+            self.dismiss(animated: true, completion: {
+                self.dismissalDelegate?.dismissal()
+            })
+        } else {
+            let alertController = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+            
+                 
+                 let cancelAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+                 alertController.addAction(cancelAction)
+                 
+                 self.present(alertController, animated: true, completion: nil)
+            
+        }
+       
+        
     }
 }
