@@ -19,6 +19,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     private var transactionType: Bool = true
     internal var dismissalDelegate: DismissalDelegate?
     internal var parentVC: MainViewController?
+    private var initialStepperValue: Double = 0
     
     private let container: UIView = {
         let view = UIView()
@@ -74,6 +75,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         textField.layer.borderWidth = 1
         textField.textAlignment = .center
         textField.layer.cornerRadius = 3
+        textField.text = "0.00"
         
         return textField
     }()
@@ -81,13 +83,16 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     private let stepper: UIStepper = {
         let stepper = UIStepper()
         stepper.translatesAutoresizingMaskIntoConstraints = false
-        stepper.minimumValue = 0.00
         stepper.tintColor = .black
         stepper.stepValue = 1
+        stepper.minimumValue = 0
+        stepper.maximumValue = 9999
+        stepper.setIncrementImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+        stepper.setDecrementImage(UIImage(systemName: "arrowtriangle.left.fill"), for: .normal)
         
         var newtransform = CGAffineTransform.identity
         newtransform = newtransform.rotated(by: -(.pi / 2))
-        newtransform = newtransform.scaledBy(x: 0.45, y: 1.25)
+        newtransform = newtransform.scaledBy(x: 0.55, y: 1.25)
         stepper.transform = newtransform
         
         return stepper
@@ -132,6 +137,8 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func configureViews() {
+        
+        initialStepperValue = stepper.value
         
         addButton.addTarget(self, action:#selector(inputTransaction(sender:)), for: .touchUpInside)
         stepper.addTarget(self, action: #selector(transactionValueChange(sender:)), for: .valueChanged)
@@ -189,14 +196,14 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             transactionValue.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             transactionValue.topAnchor.constraint(equalTo: transactionDescription.bottomAnchor, constant: 20),
-            transactionValue.heightAnchor.constraint(equalToConstant: 40),
+            transactionValue.heightAnchor.constraint(equalToConstant: 50),
             transactionValue.widthAnchor.constraint(equalToConstant: 210 / 2),
         ])
         
         NSLayoutConstraint.activate([
             stepper.topAnchor.constraint(equalTo: transactionValue.topAnchor),
             stepper.bottomAnchor.constraint(equalTo: transactionValue.bottomAnchor),
-            stepper.leadingAnchor.constraint(equalTo: transactionValue.trailingAnchor, constant: -23),
+            stepper.leadingAnchor.constraint(equalTo: transactionValue.trailingAnchor, constant: -18),
             
         ])
         
@@ -257,7 +264,16 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func transactionValueChange(sender: UIStepper){
-      //  guard let value = Double(transactionValue.text ?? "0") else { return }
+        guard let transactionNumber = Double(transactionValue.text ?? "") else { return }
+        
+        
+        if stepper.value > initialStepperValue {
+            stepper.value = transactionNumber + 1
+            initialStepperValue = stepper.value
+        } else {
+            stepper.value = transactionNumber - 1
+            initialStepperValue = stepper.value
+        }
       
         transactionValue.text = String(stepper.value)
     }
