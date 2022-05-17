@@ -21,7 +21,7 @@ class TotalsView: UIView {
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
         label.text = "Expenses"
-    
+        
         return label
     }()
     
@@ -107,7 +107,7 @@ class TotalsView: UIView {
         
         addSubview(incomeTitle)
         addSubview(incomeTotal)
-
+        
         addSubview(balanceTitle)
         addSubview(balanceTotal)
         

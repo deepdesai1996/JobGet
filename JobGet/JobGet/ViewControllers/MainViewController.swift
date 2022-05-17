@@ -17,7 +17,7 @@ class MainViewController: UIViewController, DismissalDelegate {
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var transactions = [Transaction]()
     internal var dateGroups = [GroupedDate]()
-
+    
     private let addTransactionView: AddTransactionView = {
         let addTransactionView = AddTransactionView()
         addTransactionView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         table.tableFooterView?.isHidden = true
         
         return table
-    }() 
+    }()
     
     private let transactionViewController: TransactionViewController = {
         let transactionViewController = TransactionViewController()
@@ -120,12 +120,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-    
+        
         let financialVC = FinancialViewController()
         self.addChild(financialVC)
         cell.contentView.addSubview(financialVC.view)
         
-    
+        
         financialVC.view.translatesAutoresizingMaskIntoConstraints = false
         
         var cellTransactions = [Transaction]()
@@ -151,7 +151,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MainViewController {
-
+    
     //Core Date Functions
     
     internal func getTransactionsAndGroups() {

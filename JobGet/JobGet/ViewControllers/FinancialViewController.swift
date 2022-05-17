@@ -9,7 +9,6 @@ import UIKit
 
 class FinancialViewController: UIViewController {
     
-    internal let tableView = ContentSizedTableView()
     private var type: String?
     private var transactionDescription: String?
     private var value: Double  = 0
@@ -18,22 +17,27 @@ class FinancialViewController: UIViewController {
     internal var parentVC: MainViewController?
     private var dateGroup: GroupedDate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(tableView)
-        addConstraints()
+    internal let tableView: ContentSizedTableView = {
+        let tableView = ContentSizedTableView()
         
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 1
         tableView.separatorStyle = .none
         
+        return tableView
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(tableView)
+        configureConstraints()
         
         tableView.dataSource = self
         tableView.delegate = self
     }
     
     
-    private func addConstraints() {
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),

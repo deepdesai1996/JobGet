@@ -216,7 +216,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         transactionDropdown.dropView.dropDownOptions.append("Expense")
         transactionDropdown.dropView.dropDownOptions.append("Income")
     }
-
+    
     
     @objc func inputTransaction(sender: UIButton){
         
@@ -236,18 +236,18 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         let date = Date()
         let dateComponents = calendar.component(.day, from: date)
         let numberFormatter = NumberFormatter()
-
+        
         numberFormatter.numberStyle = .ordinal
-
+        
         let day = numberFormatter.string(from: dateComponents as NSNumber)
         let dateFormatter = DateFormatter()
-
+        
         dateFormatter.dateFormat = "MMM yyyy"
-
+        
         let formattedDate = "\(day!) \(dateFormatter.string(from: date))"
         
         validateUserInputs(transactionType: transactionType, transactionDescription: tDescription, transactionValue: tValue, transactionDate: formattedDate)
-    
+        
     }
     
     @objc func transactionValueChange(sender: UIStepper){
@@ -261,7 +261,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
             stepper.value = transactionNumber - 1
             initialStepperValue = stepper.value
         }
-      
+        
         transactionValue.text = String(stepper.value)
     }
     
@@ -300,7 +300,7 @@ extension TransactionViewController {
     
     
     func addGroupDate(itemDate: String) {
-      //  getDateGroups()
+        //  getDateGroups()
         
         guard let newContext = context else { return }
         let newGroupedDate = GroupedDate(context: newContext)
@@ -364,7 +364,7 @@ extension TransactionViewController {
             guard let transactionType = transactionType else {
                 return
             }
-
+            
             createTransaction(itemType: transactionType, itemDescription: transactionDescription, itemValue: transactionValue, itemDate: transactionDate)
             
             self.dismiss(animated: true, completion: {
@@ -373,14 +373,14 @@ extension TransactionViewController {
         } else {
             let alertController = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
             
-                 
-                 let cancelAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-                 alertController.addAction(cancelAction)
-                 
-                 self.present(alertController, animated: true, completion: nil)
+            
+            let cancelAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
             
         }
-       
+        
         
     }
 }

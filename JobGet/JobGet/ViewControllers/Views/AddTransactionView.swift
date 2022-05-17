@@ -22,7 +22,7 @@ class AddTransactionView: UIView {
         button.setImage(plusImage, for: .normal)
         button.tintColor = .black
         button.setTitleColor(.black, for: .normal)
-
+        
         return button
     }()
     
