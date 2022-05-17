@@ -190,10 +190,19 @@ class TransactionViewController: UIViewController {
             transactionType = false
         }
         
+        let calendar = Calendar.current
         let date = Date()
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd"
-        let formattedDate = format.string(from: date)
+        let dateComponents = calendar.component(.day, from: date)
+        let numberFormatter = NumberFormatter()
+
+        numberFormatter.numberStyle = .ordinal
+
+        let day = numberFormatter.string(from: dateComponents as NSNumber)
+        let dateFormatter = DateFormatter()
+
+        dateFormatter.dateFormat = "MMM yyyy"
+
+        let formattedDate = "\(day!) \(dateFormatter.string(from: date))"
         
         
         createTransaction(itemType: transactionType, itemDescription: tDescription, itemValue: tValue, itemDate: formattedDate)

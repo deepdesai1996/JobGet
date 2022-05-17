@@ -26,7 +26,6 @@ class FinancialsTableViewCell: UITableViewCell {
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 1
         tableView.separatorStyle = .none
-        tableView.register(FinancialDetailTableViewCell.self, forCellReuseIdentifier: "FinDetail")
         
         
         tableView.dataSource = self
@@ -62,7 +61,7 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FinDetail", for: indexPath) as? FinancialDetailTableViewCell else { return UITableViewCell() }
+        let cell = FinancialDetailTableViewCell()
         
         cell.selectionStyle = .none
         cell.layer.borderWidth = 0.5
@@ -72,10 +71,6 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
 
         return cell
     }
-    
-        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 15
-        }
 
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let view = UIView()

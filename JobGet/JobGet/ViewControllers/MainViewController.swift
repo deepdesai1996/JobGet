@@ -42,7 +42,6 @@ class MainViewController: UIViewController, DismissalDelegate {
         table.layer.cornerRadius = 10
         table.sectionIndexColor = .black
         table.tableFooterView?.isHidden = true
-        table.register(FinancialsTableViewCell.self, forCellReuseIdentifier: "FinTableCell")
         
         return table
     }() 
@@ -61,6 +60,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         configureViews()
         addConstraints()
         getTransactionsAndGroups()
+        applyTotals()
     }
     
     @objc func addTransaction(sender: UIButton){
@@ -122,7 +122,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FinTableCell", for: indexPath) as? FinancialsTableViewCell else { return UITableViewCell() }
+        let cell = FinancialsTableViewCell()
         
         cell.selectionStyle = .none
     
@@ -174,8 +174,18 @@ extension MainViewController {
     }
     
     func dismissal() {
-        
-        
-        
+        tableView.reloadData()
+        applyTotals()
     }
+    
+    func applyTotals() {
+        let filteredExpenses = transactions.filter {$0.itemValue < 0}
+        let filteredIncome = transactions.filter {$0.itemValue > 0}
+        
+        totalsView.expensesTotal.text = String(filteredExpenses.reduce(0) { $0 + $1.itemValue})
+        totalsView.incomeTotal.text = String(filteredIncome.reduce(0) { $0 + $1.itemValue})
+        totalsView.balanceTotal.text = String(transactions.reduce(0) { $0 + $1.itemValue })
+    }
+    
+    
 }

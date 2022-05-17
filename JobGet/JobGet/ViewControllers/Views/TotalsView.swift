@@ -15,7 +15,7 @@ class TotalsView: UIView {
     private var secondSeperator: UIBezierPath?
     
     // Expenses
-    private let expensesTitle: UILabel = {
+    internal let expensesTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -24,17 +24,16 @@ class TotalsView: UIView {
         return label
     }()
     
-    private let expensesTotal: UILabel = {
+    internal let expensesTotal: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
-        label.text = "$210"
         return label
     }()
     
     // Income
-    private let incomeTitle: UILabel = {
+    internal let incomeTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -43,7 +42,7 @@ class TotalsView: UIView {
         return label
     }()
     
-    private let incomeTotal: UILabel = {
+    internal let incomeTotal: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -54,7 +53,7 @@ class TotalsView: UIView {
     
     
     // Balance
-    private let balanceTitle: UILabel = {
+    internal let balanceTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -63,7 +62,7 @@ class TotalsView: UIView {
         return label
     } ()
     
-    private let balanceTotal: UILabel = {
+    internal let balanceTotal: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -74,7 +73,7 @@ class TotalsView: UIView {
     
     // Balance Progress bar
     
-    private let balanceProgressBar: UIProgressView = {
+    internal let balanceProgressBar: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.clipsToBounds = true
