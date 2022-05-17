@@ -182,9 +182,21 @@ extension MainViewController {
         let filteredExpenses = transactions.filter {$0.itemValue < 0}
         let filteredIncome = transactions.filter {$0.itemValue > 0}
         
-        totalsView.expensesTotal.text = String(filteredExpenses.reduce(0) { $0 + $1.itemValue})
-        totalsView.incomeTotal.text = String(filteredIncome.reduce(0) { $0 + $1.itemValue})
-        totalsView.balanceTotal.text = String(transactions.reduce(0) { $0 + $1.itemValue })
+        let expenseTot = filteredExpenses.reduce(0) { $0 + $1.itemValue}
+        let incomeTot = filteredIncome.reduce(0) { $0 + $1.itemValue}
+        let balanceTot = transactions.reduce(0) { $0 + $1.itemValue }
+        
+        let expenseAbsoluteNumber = abs(expenseTot)
+        
+        let barProgress = balanceTot / incomeTot
+        
+        totalsView.expensesTotal.text = String(expenseAbsoluteNumber)
+        totalsView.incomeTotal.text = String(incomeTot)
+        totalsView.balanceTotal.text = String(balanceTot)
+        
+        totalsView.balanceProgressBar.setProgress(Float(barProgress), animated: true)
+        
+        
     }
     
     
