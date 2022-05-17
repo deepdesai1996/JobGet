@@ -12,7 +12,7 @@ protocol DismissalDelegate {
     func dismissal()
 }
 
-class TransactionViewController: UIViewController {
+class TransactionViewController: UIViewController, UITextFieldDelegate {
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var groupedDateModels = [GroupedDate]()
@@ -38,7 +38,7 @@ class TransactionViewController: UIViewController {
     }()
     
     internal var transactionDropdown: DropdownButton = {
-        let dropdown = DropdownButton.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let dropdown = DropdownButton.init()
         dropdown.translatesAutoresizingMaskIntoConstraints = false
         dropdown.layer.borderWidth = 1
         dropdown.layer.cornerRadius = 5
@@ -73,11 +73,23 @@ class TransactionViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
         textField.textAlignment = .center
-        textField.layer.cornerRadius = 5
+        textField.layer.cornerRadius = 3
         
-        
-        textField.placeholder = "$"
         return textField
+    }()
+    
+    private let stepper: UIStepper = {
+        let stepper = UIStepper()
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        stepper.minimumValue = 0.00
+        stepper.tintColor = .black
+        
+        var newtransform = CGAffineTransform.identity
+        newtransform = newtransform.rotated(by: -(.pi / 2))
+        newtransform = newtransform.scaledBy(x: 0.45, y: 1.25)
+        stepper.transform = newtransform
+        
+        return stepper
     }()
     
     private let addButton: UIButton = {
@@ -102,6 +114,15 @@ class TransactionViewController: UIViewController {
         return label
     }()
     
+    private let dollarLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "$"
+        label.textAlignment = .left
+        
+        return label
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +133,10 @@ class TransactionViewController: UIViewController {
     private func configureViews() {
         
         addButton.addTarget(self, action:#selector(inputTransaction(sender:)), for: .touchUpInside)
+        stepper.addTarget(self, action: #selector(transactionValueChange(sender:)), for: .valueChanged)
+        
+        transactionValue.delegate = self
+        transactionValue.keyboardType = .decimalPad
         
         view.addSubview(container)
         container.addSubview(titleLabel)
@@ -119,7 +144,9 @@ class TransactionViewController: UIViewController {
         container.addSubview(transactionDescription)
         container.addSubview(transactionValue)
         container.addSubview(transactionDropdown.dropView)
+        container.addSubview(stepper)
         container.addSubview(addButton)
+        transactionValue.addSubview(dollarLabel)
         
         view.frame = UIScreen.main.bounds
         
@@ -166,6 +193,19 @@ class TransactionViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
+            stepper.topAnchor.constraint(equalTo: transactionValue.topAnchor),
+            stepper.bottomAnchor.constraint(equalTo: transactionValue.bottomAnchor),
+            stepper.leadingAnchor.constraint(equalTo: transactionValue.trailingAnchor, constant: -23),
+            
+        ])
+        
+        NSLayoutConstraint.activate([
+            dollarLabel.leadingAnchor.constraint(equalTo: transactionValue.leadingAnchor, constant: 2),
+            dollarLabel.centerYAnchor.constraint(equalTo: transactionValue.centerYAnchor)
+        ])
+        
+        
+        NSLayoutConstraint.activate([
             addButton.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             addButton.topAnchor.constraint(equalTo: transactionValue.bottomAnchor, constant: 25),
             addButton.heightAnchor.constraint(equalToConstant: 40),
@@ -188,6 +228,8 @@ class TransactionViewController: UIViewController {
         
         if transactionDropdown.titleLabel?.text == "Expense" {
             transactionType = false
+        } else if transactionDropdown.titleLabel?.text == "Income" {
+            transactionType = true
         }
         
         let calendar = Calendar.current
@@ -210,6 +252,11 @@ class TransactionViewController: UIViewController {
         self.dismiss(animated: true, completion: {
             self.dismissalDelegate?.dismissal()
         })
+    
+    }
+    
+    @objc func transactionValueChange(sender: UIStepper){
+        transactionValue.text = String(sender.value)
     }
     
     func setParent(parentVC: MainViewController){

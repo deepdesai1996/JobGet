@@ -21,6 +21,7 @@ class TotalsView: UIView {
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
         label.text = "Expenses"
+    
         return label
     }()
     
@@ -29,6 +30,8 @@ class TotalsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
+        label.textAlignment = .center
+        
         return label
     }()
     
@@ -47,7 +50,6 @@ class TotalsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
-        label.text = "$1000"
         return label
     }()
     
@@ -67,7 +69,6 @@ class TotalsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
-        label.text = "$790"
         return label
     }()
     
@@ -81,7 +82,6 @@ class TotalsView: UIView {
         progressView.trackTintColor = .white
         progressView.tintColor = .systemGray3
         progressView.layer.cornerRadius = progressView.frame.size.height * 3
-        progressView.setProgress(0.57, animated: true)
         return progressView
     }()
     
@@ -90,7 +90,7 @@ class TotalsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
-        addConstraints()
+        configureConstraints()
         
     }
     
@@ -122,13 +122,13 @@ class TotalsView: UIView {
         firstSeperator?.close()
         
         secondSeperator = UIBezierPath()
-        secondSeperator?.move(to: CGPoint(x: incomeTitle.frame.maxX + 12, y: incomeTitle.frame.minY - 2))
-        secondSeperator?.addLine(to: CGPoint(x: incomeTitle.frame.maxX + 12, y: incomeTotal.frame.maxY + 2))
+        secondSeperator?.move(to: CGPoint(x: incomeTitle.frame.maxX + 16, y: incomeTitle.frame.minY - 2))
+        secondSeperator?.addLine(to: CGPoint(x: incomeTitle.frame.maxX + 16, y: incomeTotal.frame.maxY + 2))
         secondSeperator?.lineWidth = 1
         secondSeperator?.close()
     }
     
-    private func addConstraints() {
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
             expensesTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 42),
             expensesTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
@@ -137,7 +137,7 @@ class TotalsView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            incomeTitle.leadingAnchor.constraint(equalTo: expensesTitle.trailingAnchor, constant: 32 - 4),
+            incomeTitle.leadingAnchor.constraint(equalTo: expensesTitle.trailingAnchor, constant: 30 - 4),
             incomeTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
             incomeTotal.topAnchor.constraint(equalTo: incomeTitle.bottomAnchor, constant: 4),
             incomeTotal.centerXAnchor.constraint(equalTo: incomeTitle.centerXAnchor)
@@ -173,6 +173,6 @@ class TotalsView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.setNeedsDisplay()
-        addConstraints()
+        configureConstraints()
     }
 }
