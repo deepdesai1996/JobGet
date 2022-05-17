@@ -41,6 +41,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         table.separatorStyle = .none
         table.layer.cornerRadius = 10
         table.sectionIndexColor = .black
+        table.tableFooterView?.isHidden = true
         
         return table
     }() 

@@ -229,6 +229,7 @@ extension TransactionViewController {
         if groupedDateModels.isEmpty ||  !self.containsDate(date: itemDate) {
             addGroupDate(itemDate: itemDate)
         }
+        
         addTransaction(itemType: itemType, itemDescription: itemDescription, itemValue: itemValue, itemDate: itemDate)
     }
     
