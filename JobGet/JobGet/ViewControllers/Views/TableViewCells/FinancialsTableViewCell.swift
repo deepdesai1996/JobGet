@@ -74,4 +74,28 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 10
+        }
+
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            let view = UIView()
+
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.systemFont(ofSize: 17)
+            label.textColor = .black
+            view.addSubview(label)
+
+            NSLayoutConstraint.activate([
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
+            ])
+
+            label.text = "hello"
+
+            return view
+        }
+    
 }
