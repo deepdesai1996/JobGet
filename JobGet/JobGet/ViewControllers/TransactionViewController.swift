@@ -86,7 +86,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         stepper.tintColor = .black
         stepper.stepValue = 1
         stepper.minimumValue = 0
-        stepper.maximumValue = 9999
+        stepper.maximumValue = 999999
         stepper.setIncrementImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
         stepper.setDecrementImage(UIImage(systemName: "arrowtriangle.left.fill"), for: .normal)
         
@@ -242,7 +242,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         let day = numberFormatter.string(from: dateComponents as NSNumber)
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "MMM yyyy"
+        dateFormatter.dateFormat = "MMM, yyyy"
         
         let formattedDate = "\(day!) \(dateFormatter.string(from: date))"
         

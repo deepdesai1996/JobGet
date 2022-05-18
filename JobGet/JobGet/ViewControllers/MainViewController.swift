@@ -190,9 +190,13 @@ extension MainViewController {
         
         let barProgress = balanceTot / incomeTot
         
-        totalsView.expensesTotal.text = String(format: "%.2f", expenseAbsoluteNumber)
-        totalsView.incomeTotal.text = String(format: "%.2f", incomeTot)
-        totalsView.balanceTotal.text = String(format: "%.2f", balanceTot)
+        totalsView.expensesTotal.text = "$" + String(format: "%.2f", expenseAbsoluteNumber)
+        totalsView.incomeTotal.text = "$" + String(format: "%.2f", incomeTot)
+        totalsView.balanceTotal.text = "$" + String(format: "%.2f", balanceTot)
+        
+        if barProgress < 0 {
+            totalsView.balanceProgressBar.setProgress(0, animated: true)
+        }
         
         if barProgress.isNaN {
             totalsView.balanceProgressBar.setProgress(0, animated: true)

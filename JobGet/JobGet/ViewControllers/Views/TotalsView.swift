@@ -50,6 +50,8 @@ class TotalsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
+        label.textAlignment = .center
+        
         return label
     }()
     
@@ -69,6 +71,8 @@ class TotalsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
         label.font = label.font.withSize(20)
+        label.textAlignment = .center
+        
         return label
     }()
     
@@ -130,32 +134,35 @@ class TotalsView: UIView {
     
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            expensesTitle.trailingAnchor.constraint(equalTo: incomeTitle.leadingAnchor, constant: -30),
-            expensesTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
-            expensesTotal.topAnchor.constraint(equalTo: expensesTitle.bottomAnchor, constant: 4),
-            expensesTotal.centerXAnchor.constraint(equalTo: expensesTitle.centerXAnchor)
+            expensesTitle.trailingAnchor.constraint(equalTo: incomeTitle.safeAreaLayoutGuide.leadingAnchor, constant: -30),
+            expensesTitle.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24),
+            expensesTotal.topAnchor.constraint(equalTo: expensesTitle.safeAreaLayoutGuide.bottomAnchor, constant: 4),
+            expensesTotal.centerXAnchor.constraint(equalTo: expensesTitle.centerXAnchor),
+            expensesTotal.widthAnchor.constraint(equalToConstant: 90)
         ])
         
         NSLayoutConstraint.activate([
             incomeTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            incomeTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
-            incomeTotal.topAnchor.constraint(equalTo: incomeTitle.bottomAnchor, constant: 4),
-            incomeTotal.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            incomeTitle.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24),
+            incomeTotal.topAnchor.constraint(equalTo: incomeTitle.safeAreaLayoutGuide.bottomAnchor, constant: 4),
+            incomeTotal.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            incomeTotal.widthAnchor.constraint(equalToConstant: 90)
         ])
         
         NSLayoutConstraint.activate([
-            balanceTitle.leadingAnchor.constraint(equalTo: incomeTitle.trailingAnchor, constant: 30),
-            balanceTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
-            balanceTotal.topAnchor.constraint(equalTo: balanceTitle.bottomAnchor, constant: 4),
-            balanceTotal.centerXAnchor.constraint(equalTo: balanceTitle.centerXAnchor)
+            balanceTitle.leadingAnchor.constraint(equalTo: incomeTitle.safeAreaLayoutGuide.trailingAnchor, constant: 30),
+            balanceTitle.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24),
+            balanceTotal.topAnchor.constraint(equalTo: balanceTitle.safeAreaLayoutGuide.bottomAnchor, constant: 4),
+            balanceTotal.centerXAnchor.constraint(equalTo: balanceTitle.centerXAnchor),
+            balanceTotal.widthAnchor.constraint(equalToConstant: 90)
         ])
         
         NSLayoutConstraint.activate([
-            balanceProgressBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            balanceProgressBar.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -25),
+            balanceProgressBar.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            balanceProgressBar.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor,constant: -25),
             balanceProgressBar.centerXAnchor.constraint(equalTo: incomeTitle.centerXAnchor),
             balanceProgressBar.widthAnchor.constraint(equalToConstant: self.frame.width - 10),
-            balanceProgressBar.topAnchor.constraint(equalTo: incomeTotal.bottomAnchor, constant: 24),
+            balanceProgressBar.topAnchor.constraint(equalTo: incomeTotal.safeAreaLayoutGuide.bottomAnchor, constant: 24),
             balanceProgressBar.heightAnchor.constraint(equalToConstant: 16)
         ])
         
