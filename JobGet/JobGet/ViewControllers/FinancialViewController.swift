@@ -66,7 +66,12 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
         
         if !transactions.isEmpty {
             cell.titleLabel.text = self.transactions[indexPath.row].itemDescription
-            cell.secondaryLabel.text = String(format: "%.2f", self.transactions[indexPath.row].itemValue)
+            
+            if self.transactions[indexPath.row].itemValue < 0 {
+                cell.secondaryLabel.text = "- $" + String(format: "%.2f", abs(self.transactions[indexPath.row].itemValue))
+            } else {
+                cell.secondaryLabel.text = "$" + String(format: "%.2f", self.transactions[indexPath.row].itemValue)
+            }
         }
         
         return cell

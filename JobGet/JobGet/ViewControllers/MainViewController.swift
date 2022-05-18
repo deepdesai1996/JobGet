@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, DismissalDelegate {
+    typealias StackItem = (name: String, value: Double)
     
     private var type: String?
     private var transactionDescription: String?

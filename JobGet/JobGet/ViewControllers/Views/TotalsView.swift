@@ -116,8 +116,8 @@ class TotalsView: UIView {
     
     private func drawLines() {
         firstSeperator = UIBezierPath()
-        firstSeperator?.move(to: CGPoint(x: expensesTitle.frame.maxX + 12, y: expensesTitle.frame.minY - 2))
-        firstSeperator?.addLine(to: CGPoint(x: expensesTitle.frame.maxX + 12, y: expensesTotal.frame.maxY + 2))
+        firstSeperator?.move(to: CGPoint(x: expensesTitle.frame.maxX + 16, y: expensesTitle.frame.minY - 2))
+        firstSeperator?.addLine(to: CGPoint(x: expensesTitle.frame.maxX + 16, y: expensesTotal.frame.maxY + 2))
         firstSeperator?.lineWidth = 1
         firstSeperator?.close()
         
@@ -130,29 +130,31 @@ class TotalsView: UIView {
     
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            expensesTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 42),
+            expensesTitle.trailingAnchor.constraint(equalTo: incomeTitle.leadingAnchor, constant: -30),
             expensesTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
             expensesTotal.topAnchor.constraint(equalTo: expensesTitle.bottomAnchor, constant: 4),
             expensesTotal.centerXAnchor.constraint(equalTo: expensesTitle.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            incomeTitle.leadingAnchor.constraint(equalTo: expensesTitle.trailingAnchor, constant: 30 - 4),
+            incomeTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             incomeTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
             incomeTotal.topAnchor.constraint(equalTo: incomeTitle.bottomAnchor, constant: 4),
-            incomeTotal.centerXAnchor.constraint(equalTo: incomeTitle.centerXAnchor)
+            incomeTotal.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            balanceTitle.leadingAnchor.constraint(equalTo: incomeTitle.trailingAnchor, constant: 32 - 4),
+            balanceTitle.leadingAnchor.constraint(equalTo: incomeTitle.trailingAnchor, constant: 30),
             balanceTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
             balanceTotal.topAnchor.constraint(equalTo: balanceTitle.bottomAnchor, constant: 4),
             balanceTotal.centerXAnchor.constraint(equalTo: balanceTitle.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            balanceProgressBar.leadingAnchor.constraint(equalTo: expensesTitle.leadingAnchor),
-            balanceProgressBar.trailingAnchor.constraint(equalTo: balanceTitle.trailingAnchor),
+            balanceProgressBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
+            balanceProgressBar.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -25),
+            balanceProgressBar.centerXAnchor.constraint(equalTo: incomeTitle.centerXAnchor),
+            balanceProgressBar.widthAnchor.constraint(equalToConstant: self.frame.width - 10),
             balanceProgressBar.topAnchor.constraint(equalTo: incomeTotal.bottomAnchor, constant: 24),
             balanceProgressBar.heightAnchor.constraint(equalToConstant: 16)
         ])
