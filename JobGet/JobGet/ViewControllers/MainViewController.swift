@@ -42,6 +42,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         table.layer.cornerRadius = 10
         table.sectionIndexColor = .black
         table.tableFooterView?.isHidden = true
+        table.register(FinancialsTableViewCell.self, forCellReuseIdentifier: "FinTableCell")
         
         return table
     }() 
@@ -111,17 +112,9 @@ class MainViewController: UIViewController, DismissalDelegate {
             addTransactionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -26)
         ])
     }
-    
-    func containsDate(transactionArray: [Transaction], date: String) -> Bool {
-        transactionArray.compactMap(\.itemDate).contains(date)
-    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -129,7 +122,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  FinancialsTableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FinTableCell", for: indexPath) as? FinancialsTableViewCell else { return UITableViewCell() }
+        
         cell.selectionStyle = .none
     
         var cellTransactions = [Transaction]()

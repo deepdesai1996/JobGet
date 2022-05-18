@@ -23,12 +23,10 @@ class FinancialsTableViewCell: UITableViewCell {
         addSubview(tableView)
         addConstraints()
         
-        tableView.tableHeaderView?.isHidden = true
-        tableView.tableFooterView?.isHidden = true
-        
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 1
         tableView.separatorStyle = .none
+        tableView.register(FinancialDetailTableViewCell.self, forCellReuseIdentifier: "FinDetail")
         
         
         tableView.dataSource = self
@@ -64,7 +62,8 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = FinancialDetailTableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FinDetail", for: indexPath) as? FinancialDetailTableViewCell else { return UITableViewCell() }
+        
         cell.selectionStyle = .none
         cell.layer.borderWidth = 0.5
         
@@ -75,7 +74,7 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
         func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 10
+            return 15
         }
 
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -93,7 +92,7 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
                 label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
             ])
 
-            label.text = "hello"
+            label.text = transactions[section].itemDate
 
             return view
         }
