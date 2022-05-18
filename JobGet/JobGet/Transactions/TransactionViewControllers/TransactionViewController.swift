@@ -237,7 +237,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
             transactionType = nil
         }
         
-        let formattedDate = financer.getFormatedCurrentDate(format: "MMM, yyyy")
+        let formattedDate = financer.getFormatedCurrentDate(date: Date(), format: "MMM, yyyy")
         
         validateUserInputs(transactionType: transactionType, transactionDescription: tDescription, transactionValue: tValue, transactionDate: formattedDate)
         
@@ -277,7 +277,7 @@ extension TransactionViewController {
         let didAddSuccessfuly: Bool = financer.addTransactionSuccessfully(itemType: itemType, itemDescription: itemDescription, itemValue: itemValue, itemDate: itemDate)
         
         if didAddSuccessfuly == true {
-            parentVC?.getTransactionsAndGroups()
+            parentVC?.updateTransactionsAndGroups()
             
             guard let dateModel = financer.getDateGroups(groupDate: groupedDateModels) else { return }
             groupedDateModels = dateModel

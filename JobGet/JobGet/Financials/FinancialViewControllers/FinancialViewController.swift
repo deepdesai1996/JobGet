@@ -34,6 +34,9 @@ class FinancialViewController: UIViewController {
         view.addSubview(tableView)
         configureConstraints()
         
+//        guard let updatedTransaction = financer.getTransactions(transactions: transactions, tableView: tableView) else { return }
+//        transactions = updatedTransaction
+        
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -126,7 +129,7 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
                 self?.financer.deleteDateGroup(dateGroup: date, dateCompared: newResult)
             }
             
-            self?.parentVC?.getTransactionsAndGroups()
+            self?.parentVC?.updateTransactionsAndGroups()
             self?.parentVC?.applyTotals()
             self?.parentVC?.reloadInputViews()
         }))

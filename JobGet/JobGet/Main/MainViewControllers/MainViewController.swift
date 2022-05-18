@@ -60,7 +60,8 @@ class MainViewController: UIViewController, DismissalDelegate {
         super.viewDidLoad()
         configureViews()
         addConstraints()
-        getTransactionsAndGroups()
+        updateTransactionsAndGroups()
+        
         applyTotals()
     }
     
@@ -155,29 +156,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController {
     
-    //Core Date Functions
-    
-    internal func getTransactionsAndGroups() {
-        guard let newContext = context else { return }
-        
-        do {
-            transactions = try newContext.fetch(Transaction.fetchRequest())
-            dateGroups = try newContext.fetch(GroupedDate.fetchRequest())
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        } catch {
-            print("Unable to fetch transactions and/or group dates: \(error).")
-        }
-        
-    }
-    
     func dismissal() {
         tableView.reloadData()
         applyTotals()
-        getTransactionsAndGroups()
+        
+        updateTransactionsAndGroups()
     }
     
     func applyTotals() {
@@ -202,5 +185,12 @@ extension MainViewController {
         } else {
             totalsView.balanceProgressBar.setProgress(Float(barProgress), animated: true)
         }
+    }
+    
+    func updateTransactionsAndGroups() {
+        guard let updatedTransactions = financer.getTransactions(transactions: self.transactions, tableView: self.tableView) else { return }
+        guard let updatedDateGroups = financer.getDateGroups(groupDate: self.dateGroups, tableView: self.tableView) else { return }
+        self.transactions = updatedTransactions
+        self.dateGroups = updatedDateGroups
     }
 }

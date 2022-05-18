@@ -42,6 +42,58 @@ class Financer {
     }
     
     
+    func getTransactions(transactions: [Transaction]?, tableView: UITableView) -> [Transaction]? {
+        
+        var models = transactions
+        
+        do {
+            models = try context?.fetch(Transaction.fetchRequest())
+            
+            
+            DispatchQueue.main.async {
+                tableView.reloadData()
+            }
+            
+        } catch {
+            print("Unable to fetch transactions and/or group dates: \(error).")
+        }
+        
+        return models
+    }
+    
+    func getDateGroups(groupDate: [GroupedDate]?) -> [GroupedDate]? {
+        
+        var models = groupDate
+        
+        do {
+            models = try context?.fetch(GroupedDate.fetchRequest())
+            
+        } catch {
+            print("Unable to fetch GroupedDates: \(error).")
+        }
+        
+        return models
+    }
+    
+    func getDateGroups(groupDate: [GroupedDate]?, tableView: UITableView) -> [GroupedDate]? {
+        var models = groupDate
+        
+        do {
+            models =  try context?.fetch(GroupedDate.fetchRequest())
+            
+            
+            DispatchQueue.main.async {
+                tableView.reloadData()
+            }
+            
+        } catch {
+            print("Unable to fetch transactions and/or group dates: \(error).")
+        }
+        
+        return models
+    }
+    
+    
     func deleteTransaction(transaction: Transaction) -> Bool {
         var isSuccessful = false
         
@@ -84,20 +136,6 @@ class Financer {
         }
     }
     
-    func getDateGroups(groupDate: [GroupedDate]?) -> [GroupedDate]? {
-        
-        var models = groupDate
-        
-        do {
-            models = try context?.fetch(GroupedDate.fetchRequest())
-            
-        } catch {
-            print("Unable to fetch GroupedDates: \(error).")
-        }
-        
-        return models
-    }
-    
     
     func calculateExpenses(transactions: [Transaction]) -> Double {
         let filteredExpenses = transactions.filter {$0.itemValue < 0}
@@ -115,9 +153,8 @@ class Financer {
         return transactions.reduce(0) { $0 + $1.itemValue }
     }
     
-    func getFormatedCurrentDate(format: String) -> String {
+    func getFormatedCurrentDate(date: Date, format: String) -> String {
         let calendar = Calendar.current
-        let date = Date()
         let dateComponents = calendar.component(.day, from: date)
         let numberFormatter = NumberFormatter()
         

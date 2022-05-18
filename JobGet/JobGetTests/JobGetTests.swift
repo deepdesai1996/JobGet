@@ -9,24 +9,51 @@ import XCTest
 @testable import JobGet
 
 class JobGetTests: XCTestCase {
+    
+    let financer: Financer = Financer()
+    
+    private let transactions = [Transaction]()
+    
+    let validator = ValidationChecker()
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func testAddTransaction() {
+        //added this line because since these functions add to the data base, it affects the ui in real time (please make sure dates match for both function)
+        financer.addGroupDate(itemDate: "August 15th, 2022")
+        //item type = true means it is an income <> false means its an expense
+        let result = financer.addTransactionSuccessfully(itemType: true, itemDescription: "Tuition", itemValue: 7200.67, itemDate: "August 15th, 2022")
+        XCTAssertTrue(result)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
+    
+    //date formatting manually to compare, since the date changes everytime tested we can't use a constant date. It will need to be dynamic
+    func manuallyFormatDate() -> String {
+        let date = Date()
+        let calendar = Calendar.current
+        let dateComponents = calendar.component(.day, from: date)
+        let numberFormatter = NumberFormatter()
         
+        numberFormatter.numberStyle = .ordinal
+        
+        let day = numberFormatter.string(from: dateComponents as NSNumber)
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "MMYY"
+        
+        return "\(day!) \(dateFormatter.string(from: date))"
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    
+    func testFormattedDate() {
+        let todaysDate = financer.getFormatedCurrentDate(date: Date(), format: "MMYY")
+        
+        XCTAssertEqual(todaysDate, manuallyFormatDate())
     }
+    
+    func testValidationMessage() {
+        let message = validator.getValidationMessage(transactionType: nil, transactionDescription: "Bills", transactionValue: 30)
+        
+        XCTAssertEqual(message, "Please select an appropriate transactionType.")
+    }
+    
 
 }
