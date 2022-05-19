@@ -40,13 +40,6 @@
 			remoteGlobalIDString = 73D47695282A0187000D41AC;
 			remoteInfo = JobGet;
 		};
-		73D476B7282A0189000D41AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 73D4768E282A0187000D41AC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 73D47695282A0187000D41AC;
-			remoteInfo = JobGet;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +62,6 @@
 		73D476A7282A0188000D41AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73D476AC282A0188000D41AC /* JobGetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobGetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D476B0282A0189000D41AC /* JobGetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobGetTests.swift; sourceTree = "<group>"; };
-		73D476B6282A0189000D41AC /* JobGetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobGetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D476CC282A18DD000D41AC /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		73D476CF282A1ED1000D41AC /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		73DEF3EE2834734E00F7BEFD /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -88,13 +80,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		73D476A9282A0188000D41AC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		73D476B3282A0189000D41AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -136,7 +121,6 @@
 			children = (
 				73D47696282A0187000D41AC /* JobGet.app */,
 				73D476AC282A0188000D41AC /* JobGetTests.xctest */,
-				73D476B6282A0189000D41AC /* JobGetUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -303,24 +287,6 @@
 			productReference = 73D476AC282A0188000D41AC /* JobGetTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		73D476B5282A0189000D41AC /* JobGetUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 73D476C6282A0189000D41AC /* Build configuration list for PBXNativeTarget "JobGetUITests" */;
-			buildPhases = (
-				73D476B2282A0189000D41AC /* Sources */,
-				73D476B3282A0189000D41AC /* Frameworks */,
-				73D476B4282A0189000D41AC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				73D476B8282A0189000D41AC /* PBXTargetDependency */,
-			);
-			name = JobGetUITests;
-			productName = JobGetUITests;
-			productReference = 73D476B6282A0189000D41AC /* JobGetUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -335,10 +301,6 @@
 						CreatedOnToolsVersion = 13.3.1;
 					};
 					73D476AB282A0188000D41AC = {
-						CreatedOnToolsVersion = 13.3.1;
-						TestTargetID = 73D47695282A0187000D41AC;
-					};
-					73D476B5282A0189000D41AC = {
 						CreatedOnToolsVersion = 13.3.1;
 						TestTargetID = 73D47695282A0187000D41AC;
 					};
@@ -359,7 +321,6 @@
 			targets = (
 				73D47695282A0187000D41AC /* JobGet */,
 				73D476AB282A0188000D41AC /* JobGetTests */,
-				73D476B5282A0189000D41AC /* JobGetUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -375,13 +336,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		73D476AA282A0188000D41AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		73D476B4282A0189000D41AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,13 +380,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		73D476B2282A0189000D41AC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -440,11 +387,6 @@
 			isa = PBXTargetDependency;
 			target = 73D47695282A0187000D41AC /* JobGet */;
 			targetProxy = 73D476AD282A0188000D41AC /* PBXContainerItemProxy */;
-		};
-		73D476B8282A0189000D41AC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 73D47695282A0187000D41AC /* JobGet */;
-			targetProxy = 73D476B7282A0189000D41AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -664,40 +606,6 @@
 			};
 			name = Release;
 		};
-		73D476C7282A0189000D41AC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.DeepDesai.JobGetUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = JobGet;
-			};
-			name = Debug;
-		};
-		73D476C8282A0189000D41AC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.DeepDesai.JobGetUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = JobGet;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -724,15 +632,6 @@
 			buildConfigurations = (
 				73D476C4282A0189000D41AC /* Debug */,
 				73D476C5282A0189000D41AC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		73D476C6282A0189000D41AC /* Build configuration list for PBXNativeTarget "JobGetUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				73D476C7282A0189000D41AC /* Debug */,
-				73D476C8282A0189000D41AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
