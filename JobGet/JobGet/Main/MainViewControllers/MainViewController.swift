@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, DismissalDelegate {
-    typealias StackItem = (name: String, value: Double)
     
     private var type: String?
     private var transactionDescription: String?
@@ -18,6 +17,8 @@ class MainViewController: UIViewController, DismissalDelegate {
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var transactions = [Transaction]()
     internal var dateGroups = [GroupedDate]()
+    
+    private var financer = Financer()
     
     private let addTransactionView: AddTransactionView = {
         let addTransactionView = AddTransactionView()
@@ -137,6 +138,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     cellTransactions.append(item)
                 }
             }
+            
             financialVC.addData(transactions: cellTransactions, parentVC: self, dateGroup: dateGroups[indexPath.row])
         }
         
@@ -179,12 +181,9 @@ extension MainViewController {
     }
     
     func applyTotals() {
-        let filteredExpenses = transactions.filter {$0.itemValue < 0}
-        let filteredIncome = transactions.filter {$0.itemValue > 0}
-        
-        let expenseTot = filteredExpenses.reduce(0) { $0 + $1.itemValue}
-        let incomeTot = filteredIncome.reduce(0) { $0 + $1.itemValue}
-        let balanceTot = transactions.reduce(0) { $0 + $1.itemValue }
+        let expenseTot = financer.calculateExpenses(transactions: transactions)
+        let incomeTot = financer.calculateIncome(transactions: transactions)
+        let balanceTot = financer.calculateBalance(transactions: transactions)
         
         let expenseAbsoluteNumber = abs(expenseTot)
         
@@ -203,8 +202,5 @@ extension MainViewController {
         } else {
             totalsView.balanceProgressBar.setProgress(Float(barProgress), animated: true)
         }
-        
     }
-    
-    
 }

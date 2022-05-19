@@ -28,6 +28,8 @@
 		73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CC282A18DD000D41AC /* AddTransactionView.swift */; };
 		73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CF282A1ED1000D41AC /* View+Extensions.swift */; };
 		73DEF3EF2834734E00F7BEFD /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DEF3EE2834734E00F7BEFD /* UILabel+Extensions.swift */; };
+		73DEF3F928349C1C00F7BEFD /* Financer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DEF3F828349C1C00F7BEFD /* Financer.swift */; };
+		73DEF3FB2834A18800F7BEFD /* ValidationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DEF3FA2834A18800F7BEFD /* ValidationChecker.swift */; };
 		73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBB7282B354B005A896F /* TotalsView.swift */; };
 		73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +77,8 @@
 		73D476CC282A18DD000D41AC /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		73D476CF282A1ED1000D41AC /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		73DEF3EE2834734E00F7BEFD /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		73DEF3F828349C1C00F7BEFD /* Financer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Financer.swift; sourceTree = "<group>"; };
+		73DEF3FA2834A18800F7BEFD /* ValidationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationChecker.swift; sourceTree = "<group>"; };
 		73F1EBB7282B354B005A896F /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
 		73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizeTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,15 +108,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7341E806282DE7B000469C2D /* DropdownViews */ = {
-			isa = PBXGroup;
-			children = (
-				7341E807282DE7E900469C2D /* DropDownButton.swift */,
-				7341E809282DE80600469C2D /* DropdownView.swift */,
-			);
-			path = DropdownViews;
-			sourceTree = "<group>";
-		};
 		735F80DA2831A753009993D7 /* FinancialItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,14 +124,6 @@
 				735F80DC2831B2FA009993D7 /* GroupedDate+CoreDataProperties.swift */,
 			);
 			path = GroupedDate;
-			sourceTree = "<group>";
-		};
-		73B7FB27282C751B00C00AF6 /* TableViews */ = {
-			isa = PBXGroup;
-			children = (
-				73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */,
-			);
-			path = TableViews;
 			sourceTree = "<group>";
 		};
 		73D4768D282A0187000D41AC = {
@@ -162,10 +149,12 @@
 		73D47698282A0187000D41AC /* JobGet */ = {
 			isa = PBXGroup;
 			children = (
-				73D47699282A0187000D41AC /* AppDelegate.swift */,
 				73D4769B282A0187000D41AC /* SceneDelegate.swift */,
+				73D47699282A0187000D41AC /* AppDelegate.swift */,
 				73D476CB282A18C1000D41AC /* Models */,
-				73D476CA282A18B8000D41AC /* ViewControllers */,
+				73DEF3F028348D6600F7BEFD /* Main */,
+				73DEF3F628348F4C00F7BEFD /* Transactions */,
+				73DEF3F428348DFC00F7BEFD /* Financials */,
 				73D476CE282A1EC1000D41AC /* Extensions */,
 				73D476A2282A0188000D41AC /* Assets.xcassets */,
 				73D476A4282A0188000D41AC /* LaunchScreen.storyboard */,
@@ -194,29 +183,25 @@
 		73D476C9282A18B1000D41AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				73F1EBB7282B354B005A896F /* TotalsView.swift */,
-				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
-				73B7FB27282C751B00C00AF6 /* TableViews */,
-				73F1EBBD282B73C0005A896F /* TableViewCells */,
-				7341E806282DE7B000469C2D /* DropdownViews */,
+				7341E809282DE80600469C2D /* DropdownView.swift */,
+				7341E807282DE7E900469C2D /* DropDownButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		73D476CA282A18B8000D41AC /* ViewControllers */ = {
+		73D476CA282A18B8000D41AC /* TransactionViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				73D4769D282A0187000D41AC /* MainViewController.swift */,
-				738C9FFC28335D5B00B0AB1A /* FinancialViewController.swift */,
 				73B7FB2A282CAD6500C00AF6 /* TransactionViewController.swift */,
-				73D476C9282A18B1000D41AC /* Views */,
 			);
-			path = ViewControllers;
+			path = TransactionViewControllers;
 			sourceTree = "<group>";
 		};
 		73D476CB282A18C1000D41AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				73DEF3F828349C1C00F7BEFD /* Financer.swift */,
+				73DEF3FA2834A18800F7BEFD /* ValidationChecker.swift */,
 				735F80D32831A397009993D7 /* FinancialModel.xcdatamodeld */,
 				735F80DF2831B30A009993D7 /* GroupedDate */,
 				735F80DA2831A753009993D7 /* FinancialItem */,
@@ -233,12 +218,65 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		73F1EBBD282B73C0005A896F /* TableViewCells */ = {
+		73DEF3F028348D6600F7BEFD /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				73DEF3F128348D7600F7BEFD /* MainViewControllers */,
+				73DEF3F228348D9400F7BEFD /* Views */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		73DEF3F128348D7600F7BEFD /* MainViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				73D4769D282A0187000D41AC /* MainViewController.swift */,
+			);
+			path = MainViewControllers;
+			sourceTree = "<group>";
+		};
+		73DEF3F228348D9400F7BEFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73F1EBB7282B354B005A896F /* TotalsView.swift */,
+				73D476CC282A18DD000D41AC /* AddTransactionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		73DEF3F428348DFC00F7BEFD /* Financials */ = {
+			isa = PBXGroup;
+			children = (
+				73DEF3F528348E2200F7BEFD /* FinancialViewControllers */,
+				73F1EBBD282B73C0005A896F /* FinancialViews */,
+			);
+			path = Financials;
+			sourceTree = "<group>";
+		};
+		73DEF3F528348E2200F7BEFD /* FinancialViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				738C9FFC28335D5B00B0AB1A /* FinancialViewController.swift */,
+			);
+			path = FinancialViewControllers;
+			sourceTree = "<group>";
+		};
+		73DEF3F628348F4C00F7BEFD /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				73D476C9282A18B1000D41AC /* Views */,
+				73D476CA282A18B8000D41AC /* TransactionViewControllers */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		73F1EBBD282B73C0005A896F /* FinancialViews */ = {
+			isa = PBXGroup;
+			children = (
+				73F1EBBB282B6A7B005A896F /* ContentSizeTableView.swift */,
 				735F80D1282EE02C009993D7 /* FinancialDetailTableViewCell.swift */,
 			);
-			path = TableViewCells;
+			path = FinancialViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +418,7 @@
 				738C9FFD28335D5B00B0AB1A /* FinancialViewController.swift in Sources */,
 				7341E808282DE7E900469C2D /* DropDownButton.swift in Sources */,
 				73D4769A282A0187000D41AC /* AppDelegate.swift in Sources */,
+				73DEF3F928349C1C00F7BEFD /* Financer.swift in Sources */,
 				735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */,
 				7341E80A282DE80600469C2D /* DropdownView.swift in Sources */,
 				73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */,
@@ -388,6 +427,7 @@
 				73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */,
 				73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */,
 				73B7FB2B282CAD6500C00AF6 /* TransactionViewController.swift in Sources */,
+				73DEF3FB2834A18800F7BEFD /* ValidationChecker.swift in Sources */,
 				735F80D52831A397009993D7 /* FinancialModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

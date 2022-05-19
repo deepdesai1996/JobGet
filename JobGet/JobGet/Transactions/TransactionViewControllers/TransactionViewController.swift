@@ -21,6 +21,9 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     internal var parentVC: MainViewController?
     private var initialStepperValue: Double = 0
     
+    private let validationChecker = ValidationChecker()
+    private let financer = Financer()
+    
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +126,9 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
-        getDateGroups()
+        
+        guard let dateModel = financer.getDateGroups(groupDate: groupedDateModels) else { return }
+        groupedDateModels = dateModel
     }
     
     private func configureViews() {
@@ -232,19 +237,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
             transactionType = nil
         }
         
-        let calendar = Calendar.current
-        let date = Date()
-        let dateComponents = calendar.component(.day, from: date)
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .ordinal
-        
-        let day = numberFormatter.string(from: dateComponents as NSNumber)
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "MMM, yyyy"
-        
-        let formattedDate = "\(day!) \(dateFormatter.string(from: date))"
+        let formattedDate = financer.getFormatedCurrentDate(format: "MMM, yyyy")
         
         validateUserInputs(transactionType: transactionType, transactionDescription: tDescription, transactionValue: tValue, transactionDate: formattedDate)
         
@@ -276,71 +269,23 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
 
 extension TransactionViewController {
     
-    //Core Data Transactions
-    
-    private func getDateGroups() {
-        do {
-            guard let newContext = context else { return }
-            groupedDateModels = try newContext.fetch(GroupedDate.fetchRequest())
-            
-            
-        } catch {
-            print("Unable to fetch GroupedDates: \(error).")
-        }
-        
-    }
-    
     func createTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: String) {
         if groupedDateModels.isEmpty ||  !self.containsDate(date: itemDate) {
-            addGroupDate(itemDate: itemDate)
+            financer.addGroupDate(itemDate: itemDate)
         }
         
-        addTransaction(itemType: itemType, itemDescription: itemDescription, itemValue: itemValue, itemDate: itemDate)
-    }
-    
-    
-    func addGroupDate(itemDate: String) {
-        //  getDateGroups()
+        let didAddSuccessfuly: Bool = financer.addTransactionSuccessfully(itemType: itemType, itemDescription: itemDescription, itemValue: itemValue, itemDate: itemDate)
         
-        guard let newContext = context else { return }
-        let newGroupedDate = GroupedDate(context: newContext)
-        
-        newGroupedDate.date = itemDate
-        do {
-            try newContext.save()
+        if didAddSuccessfuly == true {
+            parentVC?.getTransactionsAndGroups()
             
-        } catch {
-            print("Unable to create new GroupDate: \(error)")
+            guard let dateModel = financer.getDateGroups(groupDate: groupedDateModels) else { return }
+            groupedDateModels = dateModel
         }
     }
     
     func containsDate(date: String) -> Bool {
         groupedDateModels.compactMap(\.date).contains(date)
-    }
-    
-    func addTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: String){
-        guard let newContext = context else { return }
-        
-        let newTransaction = Transaction(context: newContext)
-        
-        newTransaction.itemType = itemType
-        newTransaction.itemDescription = itemDescription
-        
-        if itemType == true {
-            newTransaction.itemValue = itemValue
-        } else {
-            newTransaction.itemValue = -itemValue
-        }
-        
-        newTransaction.itemDate = itemDate
-        
-        do {
-            try newContext.save()
-            parentVC?.getTransactionsAndGroups()
-            getDateGroups()
-        } catch {
-            print("Unable to create new Transaction: \(error)")
-        }
     }
 }
 
@@ -350,17 +295,9 @@ extension TransactionViewController {
     
     private func validateUserInputs(transactionType: Bool?, transactionDescription: String, transactionValue: Double, transactionDate: String) {
         
-        var message: String = ""
+        let message = validationChecker.getValidationMessage(transactionType: transactionType, transactionDescription: transactionDescription, transactionValue: transactionValue)
         
-        if transactionType == nil {
-            message += "Please select an appropriate transactionType."
-        } else if transactionDescription.isEmpty {
-            message += "Please enter a description."
-        } else if transactionValue <= 0 {
-            message += "please enter a value greater than 0."
-        }
-        
-        if message == "" {
+        if  message == "" {
             guard let transactionType = transactionType else {
                 return
             }

@@ -17,6 +17,8 @@ class FinancialViewController: UIViewController {
     internal var parentVC: MainViewController?
     private var dateGroup: GroupedDate?
     
+    private let financer = Financer()
+    
     internal let tableView: ContentSizedTableView = {
         let tableView = ContentSizedTableView()
         
@@ -100,6 +102,7 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
         return view
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -112,7 +115,16 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
             
             guard let transaction = self?.transactions[indexPath.row] else { return }
             guard let date = self?.dateGroup else { return }
-            self?.deleteTransaction(transaction: transaction, dateGroup: date)
+            //self?.deleteTransaction(transaction: transaction, dateGroup: date)
+            guard let isTransactionDeleted = self?.financer.deleteTransaction(transaction: transaction) else { return }
+            
+            if isTransactionDeleted {
+                let result = self?.transactions.filter { $0.itemDate == self?.dateGroup?.date}
+                
+                guard let newResult = result else { return }
+                
+                self?.financer.deleteDateGroup(dateGroup: date, dateCompared: newResult)
+            }
             
             self?.parentVC?.getTransactionsAndGroups()
             self?.parentVC?.applyTotals()
@@ -122,28 +134,4 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
         parentVC?.present(sheet, animated: true)
         
     }
-    
-    private func deleteTransaction(transaction: Transaction, dateGroup: GroupedDate) {
-        
-        context?.delete(transaction)
-        
-        do {
-            try context?.save()
-        } catch {
-            print("Unable to Delete Transaction: \(error)")
-        }
-        
-        let result = transactions.filter { $0.itemDate == dateGroup.date}
-        
-        if result.isEmpty {
-            context?.delete(dateGroup)
-            
-            do {
-                try context?.save()
-            } catch {
-                print("Unable to Delete Transaction: \(error)")
-            }
-        }
-    }
-    
 }
