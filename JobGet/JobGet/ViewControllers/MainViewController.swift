@@ -16,9 +16,8 @@ class MainViewController: UIViewController, DismissalDelegate {
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var transactions = [Transaction]()
-    private var dateGroups = [GroupedDate]()
+    internal var dateGroups = [GroupedDate]()
 
-    
     private let addTransactionView: AddTransactionView = {
         let addTransactionView = AddTransactionView()
         addTransactionView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +89,6 @@ class MainViewController: UIViewController, DismissalDelegate {
     
     
     private func addConstraints() {
-        
         NSLayoutConstraint.activate([
             totalsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             totalsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
@@ -127,8 +125,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         self.addChild(financialVC)
         cell.contentView.addSubview(financialVC.view)
         
-        
-        
+    
         financialVC.view.translatesAutoresizingMaskIntoConstraints = false
         
         var cellTransactions = [Transaction]()
@@ -151,7 +148,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
 }
 
 extension MainViewController {
@@ -202,8 +198,6 @@ extension MainViewController {
         } else {
             totalsView.balanceProgressBar.setProgress(Float(barProgress), animated: true)
         }
-       
-        
         
     }
     

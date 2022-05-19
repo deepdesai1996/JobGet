@@ -42,7 +42,7 @@ class FinancialViewController: UIViewController {
         ])
     }
     
-    internal func addData(transactions: [Transaction], parentVC: MainViewController, dateGroup: GroupedDate){
+    internal func addData(transactions: [Transaction], parentVC: MainViewController, dateGroup: GroupedDate) {
         self.transactions = transactions
         self.parentVC = parentVC
         self.dateGroup = dateGroup
@@ -60,34 +60,36 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = FinancialDetailTableViewCell()
         cell.layer.borderWidth = 0.5
         
-        cell.titleLabel.text = self.transactions[indexPath.row].itemDescription
-        cell.secondaryLabel.text = String(format: "%.2f", self.transactions[indexPath.row].itemValue)
-
+        if !transactions.isEmpty {
+            cell.titleLabel.text = self.transactions[indexPath.row].itemDescription
+            cell.secondaryLabel.text = String(format: "%.2f", self.transactions[indexPath.row].itemValue)
+        }
+        
         return cell
     }
-
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let view = UIView()
-
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont.systemFont(ofSize: 17)
-            label.textColor = .black
-            view.addSubview(label)
-
-            NSLayoutConstraint.activate([
-                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
-            ])
-
-            if !transactions.isEmpty {
-                label.text = transactions[section].itemDate
-            }
-           
-
-            return view
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .black
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
+        ])
+        
+        if !transactions.isEmpty {
+            label.text = transactions[section].itemDate
         }
+        
+        
+        return view
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -102,7 +104,8 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
             guard let transaction = self?.transactions[indexPath.row] else { return }
             guard let date = self?.dateGroup else { return }
             self?.deleteTransaction(transaction: transaction, dateGroup: date)
-            self?.parentVC?.dismissal()
+            
+            self?.parentVC?.getTransactionsAndGroups()
         }))
         
         parentVC?.present(sheet, animated: true)
@@ -131,5 +134,5 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
-
+    
 }
