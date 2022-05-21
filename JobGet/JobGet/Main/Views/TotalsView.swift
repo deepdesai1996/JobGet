@@ -25,6 +25,8 @@ class TotalsView: UIView {
         return label
     }()
     
+    // Expenses totals
+    
     internal let expensesTotal: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +47,7 @@ class TotalsView: UIView {
         return label
     }()
     
+    // Income total
     internal let incomeTotal: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +68,8 @@ class TotalsView: UIView {
         label.text = "Balance"
         return label
     } ()
+    
+    // Balance total
     
     internal let balanceTotal: UILabel = {
         let label = UILabel()
@@ -95,7 +100,6 @@ class TotalsView: UIView {
         super.init(frame: frame)
         configureViews()
         configureConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -118,6 +122,8 @@ class TotalsView: UIView {
         addSubview(balanceProgressBar)
     }
     
+    
+    // Draws seperation lines between values for the view (as seen on design)
     private func drawLines() {
         firstSeperator = UIBezierPath()
         firstSeperator?.move(to: CGPoint(x: expensesTitle.frame.maxX + 16, y: expensesTitle.frame.minY - 2))
@@ -132,6 +138,7 @@ class TotalsView: UIView {
         secondSeperator?.close()
     }
     
+    // adds constraints to views using AutoLayout
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             expensesTitle.trailingAnchor.constraint(equalTo: incomeTitle.safeAreaLayoutGuide.leadingAnchor, constant: -30),
@@ -169,6 +176,8 @@ class TotalsView: UIView {
         
     }
     
+    // Draws lines seen on designs
+    
     override func draw(_ rect: CGRect) {
         self.drawLines()
         UIColor.black.setStroke()
@@ -178,7 +187,6 @@ class TotalsView: UIView {
     
     
     //lines are redrawn when rotating device
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.setNeedsDisplay()

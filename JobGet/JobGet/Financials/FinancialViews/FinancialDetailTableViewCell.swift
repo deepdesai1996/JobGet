@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Custom cell for details of transactions -> item description and value 
 class FinancialDetailTableViewCell: UITableViewCell {
     
     let titleLabel: UILabel = {

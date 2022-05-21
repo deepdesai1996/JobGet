@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
+// Extension to pin view to top, bottom, leading, and trailing anchors
 extension UIView {
-    
     func pinToSuperView(superView: UIView) {
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: superView.topAnchor),

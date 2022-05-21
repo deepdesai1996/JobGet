@@ -10,14 +10,12 @@ import UIKit
 
 class MainViewController: UIViewController, DismissalDelegate {
     
-    private var type: String?
-    private var transactionDescription: String?
-    private var value: Double = 0
-    
-    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    //Transactions (stores transactions added by user)
     private var transactions = [Transaction]()
+    // date Groups (determines how many days, used to oder the list
     internal var dateGroups = [GroupedDate]()
     
+    //financer class which is used to create/delete/calculate transactions
     private var financer = Financer()
     
     private let addTransactionView: AddTransactionView = {
@@ -34,6 +32,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         return totalsView
     }()
     
+    // First table view, segmants sections of days
     internal var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +46,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         return table
     }()
     
+    // TransactionView controller, where user adds transactions
     private let transactionViewController: TransactionViewController = {
         let transactionViewController = TransactionViewController()
         transactionViewController.modalPresentationStyle = .overCurrentContext
@@ -65,6 +65,7 @@ class MainViewController: UIViewController, DismissalDelegate {
         applyTotals()
     }
     
+    // transaction floater button
     @objc func addTransaction(sender: UIButton){
         transactionViewController.setParent(parentVC: self)
         present(transactionViewController, animated: true)
@@ -82,8 +83,6 @@ class MainViewController: UIViewController, DismissalDelegate {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
         
         transactionViewController.dismissalDelegate = self
         
@@ -117,10 +116,13 @@ class MainViewController: UIViewController, DismissalDelegate {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
+    // number of sections is based on number of days
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dateGroups.count
     }
     
+    // Financial VC is used as cell which is the detail of each transaction based on each day
+    // Multiple days can have multiple transactions
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         
@@ -156,13 +158,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController {
     
+    // Delegate is triggered because the transactions view is displayed modally,
+    // so when it comes back to this view it does not trigger the viewDidAppear or viewWillAppear
+    // this function is important to update the views
     func dismissal() {
         tableView.reloadData()
         applyTotals()
-        
         updateTransactionsAndGroups()
     }
     
+    // Adds totals to the totals view
     func applyTotals() {
         let expenseTot = financer.calculateExpenses(transactions: transactions)
         let incomeTot = financer.calculateIncome(transactions: transactions)
@@ -187,6 +192,7 @@ extension MainViewController {
         }
     }
     
+    // Used in multiple VCs to update the array of objects
     func updateTransactionsAndGroups() {
         guard let updatedTransactions = financer.getTransactions(transactions: self.transactions, tableView: self.tableView) else { return }
         guard let updatedDateGroups = financer.getDateGroups(groupDate: self.dateGroups, tableView: self.tableView) else { return }

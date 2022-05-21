@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// Dynamic table, size changes based on number cells being inputted/deleted
 final class ContentSizedTableView: UITableView {
     
     override var contentSize:CGSize {

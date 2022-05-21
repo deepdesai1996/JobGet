@@ -9,6 +9,8 @@ import Foundation
 
 class ValidationChecker {
     
+    //Validates whether user enters instances correctly
+    
     func getValidationMessage(transactionType: Bool?, transactionDescription: String, transactionValue: Double) -> String {
        var message: String = ""
        

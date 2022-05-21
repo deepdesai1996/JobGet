@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+
+// The dropdown view and cells, created from scratch
+
 class DropdownView: UIView {
     
     internal var dropDownOptions = [String]()
@@ -33,6 +36,7 @@ class DropdownView: UIView {
     
 }
 
+// giving number of cells and names of cells 
 extension DropdownView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

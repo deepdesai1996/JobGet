@@ -17,8 +17,10 @@ class FinancialViewController: UIViewController {
     internal var parentVC: MainViewController?
     private var dateGroup: GroupedDate?
     
+    // Financer for creating/deleting/calculator transactions and groupdates
     private let financer = Financer()
     
+    // Dynamic table created from scratch, adjusts size based on data inputted
     internal let tableView: ContentSizedTableView = {
         let tableView = ContentSizedTableView()
         
@@ -33,15 +35,12 @@ class FinancialViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         configureConstraints()
-        
-//        guard let updatedTransaction = financer.getTransactions(transactions: transactions, tableView: tableView) else { return }
-//        transactions = updatedTransaction
-        
         tableView.dataSource = self
         tableView.delegate = self
     }
     
     
+    //configuree contraints for tableview
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
@@ -51,6 +50,7 @@ class FinancialViewController: UIViewController {
         ])
     }
     
+    // passing data to finance view 
     internal func addData(transactions: [Transaction], parentVC: MainViewController, dateGroup: GroupedDate) {
         self.transactions = transactions
         self.parentVC = parentVC
@@ -60,10 +60,13 @@ class FinancialViewController: UIViewController {
 
 extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
     
+    // rows based on transaction numbers
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return transactions.count
     }
+    
+    //adding details using custom cells
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = FinancialDetailTableViewCell()
@@ -82,6 +85,7 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // header with date
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         
@@ -106,6 +110,7 @@ extension FinancialViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
+    // did select row to delete rows and transactions/dategroups
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         

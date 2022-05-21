@@ -25,7 +25,6 @@
 		73D476B1282A0189000D41AC /* JobGetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476B0282A0189000D41AC /* JobGetTests.swift */; };
 		73D476CD282A18DD000D41AC /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CC282A18DD000D41AC /* AddTransactionView.swift */; };
 		73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D476CF282A1ED1000D41AC /* View+Extensions.swift */; };
-		73DEF3EF2834734E00F7BEFD /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DEF3EE2834734E00F7BEFD /* UILabel+Extensions.swift */; };
 		73DEF3F928349C1C00F7BEFD /* Financer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DEF3F828349C1C00F7BEFD /* Financer.swift */; };
 		73DEF3FB2834A18800F7BEFD /* ValidationChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DEF3FA2834A18800F7BEFD /* ValidationChecker.swift */; };
 		73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F1EBB7282B354B005A896F /* TotalsView.swift */; };
@@ -64,7 +63,6 @@
 		73D476B0282A0189000D41AC /* JobGetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobGetTests.swift; sourceTree = "<group>"; };
 		73D476CC282A18DD000D41AC /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		73D476CF282A1ED1000D41AC /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		73DEF3EE2834734E00F7BEFD /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		73DEF3F828349C1C00F7BEFD /* Financer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Financer.swift; sourceTree = "<group>"; };
 		73DEF3FA2834A18800F7BEFD /* ValidationChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationChecker.swift; sourceTree = "<group>"; };
 		73F1EBB7282B354B005A896F /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
@@ -153,8 +151,8 @@
 		73D476C9282A18B1000D41AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7341E809282DE80600469C2D /* DropdownView.swift */,
 				7341E807282DE7E900469C2D /* DropDownButton.swift */,
+				7341E809282DE80600469C2D /* DropdownView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				73D476CF282A1ED1000D41AC /* View+Extensions.swift */,
-				73DEF3EE2834734E00F7BEFD /* UILabel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -362,7 +359,6 @@
 				735F80D2282EE02C009993D7 /* FinancialDetailTableViewCell.swift in Sources */,
 				7341E80A282DE80600469C2D /* DropdownView.swift in Sources */,
 				73F1EBB8282B354B005A896F /* TotalsView.swift in Sources */,
-				73DEF3EF2834734E00F7BEFD /* UILabel+Extensions.swift in Sources */,
 				73D476D0282A1ED1000D41AC /* View+Extensions.swift in Sources */,
 				73D4769C282A0187000D41AC /* SceneDelegate.swift in Sources */,
 				73F1EBBC282B6A7B005A896F /* ContentSizeTableView.swift in Sources */,

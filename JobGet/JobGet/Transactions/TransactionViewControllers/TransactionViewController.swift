@@ -8,21 +8,33 @@
 import Foundation
 import UIKit
 
+// delegate to trigger MainVC (due to this view being presented modally)
 protocol DismissalDelegate {
     func dismissal()
 }
 
 class TransactionViewController: UIViewController, UITextFieldDelegate {
     
-    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    // Group Date Model (mainly to track ammount of days)
     private var groupedDateModels = [GroupedDate]()
+    
     private var transactionType: Bool?
+    
+    // delegate to trigger MainVC
     internal var dismissalDelegate: DismissalDelegate?
+    
+    //ParentVC
     internal var parentVC: MainViewController?
+    
+    // stepper value for UIStepper
     private var initialStepperValue: Double = 0
     
+    // Validation class
     private let validationChecker = ValidationChecker()
+    
+    // Financer class which gives 
     private let financer = Financer()
+
     
     private let container: UIView = {
         let view = UIView()
@@ -40,6 +52,10 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         
         return label
     }()
+    
+    
+    // Dropdown view which was created from scratch
+    // contains options for income and expenses
     
     internal var transactionDropdown: DropdownButton = {
         let dropdown = DropdownButton.init()
@@ -61,6 +77,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         return dropdown
     }()
     
+    // Transaction Desctiptions
     private let transactionDescription: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +89,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
+    // Transaction Value
     private let transactionValue: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +100,8 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         
         return textField
     }()
+    
+    // Stepper to increase/decrease transaction value
     
     private let stepper: UIStepper = {
         let stepper = UIStepper()
@@ -101,6 +121,8 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         return stepper
     }()
     
+    
+    // Add button to add transaction/alidation
     private let addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +135,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    // Dollar label
     private let dollarLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -131,6 +154,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         groupedDateModels = dateModel
     }
     
+    // Configure attributes and Autolayout views
     private func configureViews() {
         
         initialStepperValue = stepper.value
@@ -215,7 +239,6 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
             addButton.widthAnchor.constraint(equalToConstant: 210 / 1.5),
         ])
         
-        
         container.layer.borderWidth = 1
         
         transactionDropdown.dropView.dropDownOptions.append("Expense")
@@ -223,12 +246,14 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    // Button validates then creates transaction
     @objc func inputTransaction(sender: UIButton){
         
         guard let tValueString = transactionValue.text else { return }
         guard let tValue = Double(tValueString) else { return }
         guard let tDescription = transactionDescription.text else { return }
         
+        // transactio value types: True = income, False = expenses
         if transactionDropdown.titleLabel?.text == "Expense" {
             transactionType = false
         } else if transactionDropdown.titleLabel?.text == "Income" {
@@ -243,9 +268,9 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    //
     @objc func transactionValueChange(sender: UIStepper){
         guard let transactionNumber = Double(transactionValue.text ?? "") else { return }
-        
         
         if stepper.value > initialStepperValue {
             stepper.value = transactionNumber + 1
@@ -263,9 +288,6 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
     }
     
 }
-
-
-// MARK: - TransactionVC Data Handling
 
 extension TransactionViewController {
     
@@ -289,7 +311,7 @@ extension TransactionViewController {
     }
 }
 
-// MARK: - TransactionVC Validation Handling
+// MARK: - TransactionVC Validation Views
 
 extension TransactionViewController {
     
@@ -317,7 +339,5 @@ extension TransactionViewController {
             self.present(alertController, animated: true, completion: nil)
             
         }
-        
-        
     }
 }

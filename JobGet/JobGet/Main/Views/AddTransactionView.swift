@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// floating action button on maincontroller which triggers TransactionVC
 class AddTransactionView: UIView {
     
     let addTransactionButton: UIButton = {

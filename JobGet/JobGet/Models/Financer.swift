@@ -10,8 +10,11 @@ import UIKit
 
 class Financer {
     
+    // Core Data Context
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
+    
+    // Adding transaction to Core Database
     func addTransactionSuccessfully(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: String) -> Bool {
         var isSuccessful = false
         
@@ -42,6 +45,23 @@ class Financer {
     }
     
     
+    //Adding date group
+    func addGroupDate(itemDate: String) {
+        
+        guard let newContext = context else { return }
+        let newGroupedDate = GroupedDate(context: newContext)
+        
+        newGroupedDate.date = itemDate
+        do {
+            try newContext.save()
+        } catch {
+            print("Unable to create new GroupDate: \(error)")
+        }
+    }
+    
+    
+    // Getting transactions from persistent storage
+    // Gets number of transactions + properties
     func getTransactions(transactions: [Transaction]?, tableView: UITableView) -> [Transaction]? {
         
         var models = transactions
@@ -61,6 +81,9 @@ class Financer {
         return models
     }
     
+    
+    // getting Date Groups from Persistent storage
+    // Date groups determine number of days which were added by user
     func getDateGroups(groupDate: [GroupedDate]?) -> [GroupedDate]? {
         
         var models = groupDate
@@ -75,6 +98,7 @@ class Financer {
         return models
     }
     
+    // Getting datagroup and updating Tableview
     func getDateGroups(groupDate: [GroupedDate]?, tableView: UITableView) -> [GroupedDate]? {
         var models = groupDate
         
@@ -94,6 +118,7 @@ class Financer {
     }
     
     
+    // Deleting transaction from persistent Storage
     func deleteTransaction(transaction: Transaction) -> Bool {
         var isSuccessful = false
         
@@ -110,6 +135,7 @@ class Financer {
         return isSuccessful
     }
     
+    //Deleting Date Groups
     func deleteDateGroup(dateGroup: GroupedDate, dateCompared: [Transaction]) {
         if dateCompared.isEmpty {
             context?.delete(dateGroup)
@@ -122,20 +148,8 @@ class Financer {
         }
     }
     
-        
-    func addGroupDate(itemDate: String) {
-        
-        guard let newContext = context else { return }
-        let newGroupedDate = GroupedDate(context: newContext)
-        
-        newGroupedDate.date = itemDate
-        do {
-            try newContext.save()
-        } catch {
-            print("Unable to create new GroupDate: \(error)")
-        }
-    }
     
+    // Calculations within transactions which determine the totals
     
     func calculateExpenses(transactions: [Transaction]) -> Double {
         let filteredExpenses = transactions.filter {$0.itemValue < 0}
@@ -153,6 +167,7 @@ class Financer {
         return transactions.reduce(0) { $0 + $1.itemValue }
     }
     
+    // Date Formatting presentable for view
     func getFormatedCurrentDate(date: Date, format: String) -> String {
         let calendar = Calendar.current
         let dateComponents = calendar.component(.day, from: date)
