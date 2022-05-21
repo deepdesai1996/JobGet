@@ -38,16 +38,6 @@
                ReferencedContainer = "container:JobGet.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "73D476B5282A0189000D41AC"
-               BuildableName = "JobGetUITests.xctest"
-               BlueprintName = "JobGetUITests"
-               ReferencedContainer = "container:JobGet.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
