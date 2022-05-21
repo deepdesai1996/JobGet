@@ -97,6 +97,7 @@ class TransactionViewController: UIViewController, UITextFieldDelegate {
         textField.textAlignment = .center
         textField.layer.cornerRadius = 3
         textField.text = "0.00"
+        textField.clearsOnBeginEditing = true
         
         return textField
     }()
