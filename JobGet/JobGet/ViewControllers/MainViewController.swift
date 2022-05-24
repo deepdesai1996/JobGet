@@ -34,7 +34,7 @@ class MainViewController: UIViewController, DismissalDelegate {
     }()
     
     private var tableView: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), style: .grouped)
+        let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.clipsToBounds = true
         table.backgroundColor = .white
@@ -110,9 +110,17 @@ class MainViewController: UIViewController, DismissalDelegate {
             addTransactionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -26)
         ])
     }
+    
+    func containsDate(transactionArray: [Transaction], date: String) -> Bool {
+        transactionArray.compactMap(\.itemDate).contains(date)
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

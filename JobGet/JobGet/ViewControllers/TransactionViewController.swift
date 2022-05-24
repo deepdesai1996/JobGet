@@ -226,7 +226,9 @@ extension TransactionViewController {
     }
     
     func createTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: String) {
-        addGroupDate(itemDate: itemDate)
+        if groupedDateModels.isEmpty ||  !self.containsDate(date: itemDate) {
+            addGroupDate(itemDate: itemDate)
+        }
         addTransaction(itemType: itemType, itemDescription: itemDescription, itemValue: itemValue, itemDate: itemDate)
     }
     
@@ -236,23 +238,14 @@ extension TransactionViewController {
         
         guard let newContext = context else { return }
         let newGroupedDate = GroupedDate(context: newContext)
-      
-        if groupedDateModels.isEmpty {
-            
-            newGroupedDate.date = itemDate
-        } else {
-            
-            if !self.containsDate(date: itemDate) {
-                newGroupedDate.date = itemDate
-                do {
-                    try newContext.save()
-                    
-                } catch {
-                    print("Unable to create new item: \(error)")
-                }
-            }
-        }
         
+        newGroupedDate.date = itemDate
+        do {
+            try newContext.save()
+            
+        } catch {
+            print("Unable to create new item: \(error)")
+        }
     }
     
     func containsDate(date: String) -> Bool {
