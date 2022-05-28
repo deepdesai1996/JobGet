@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, DismissalDelegate {
     
     private var type: String?
     private var transactionDescription: String?
@@ -33,8 +33,8 @@ class MainViewController: UIViewController {
         return totalsView
     }()
     
-    private let tableView: UITableView = {
-        let table = UITableView()
+    private var tableView: UITableView = {
+        let table = UITableView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.clipsToBounds = true
         table.backgroundColor = .white
@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         table.sectionIndexColor = .black
         
         return table
-    }()
+    }() 
     
     private let transactionViewController: TransactionViewController = {
         let transactionViewController = TransactionViewController()
@@ -58,10 +58,11 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         configureViews()
         addConstraints()
-        GetTransactionsAndGroups()
+        getTransactionsAndGroups()
     }
     
     @objc func addTransaction(sender: UIButton){
+        transactionViewController.setParent(parentVC: self)
         present(transactionViewController, animated: true)
     }
     
@@ -77,6 +78,10 @@ class MainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
+        
+        transactionViewController.dismissalDelegate = self
         
         addTransactionView.addTransactionButton.addTarget(self, action:#selector(addTransaction(sender:)), for: .touchUpInside)
     }
@@ -115,9 +120,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = FinancialsTableViewCell()
+        let cell =  FinancialsTableViewCell()
         cell.selectionStyle = .none
-        
+    
         var cellTransactions = [Transaction]()
         
         for item in transactions {
@@ -136,7 +141,7 @@ extension MainViewController {
 
     //Core Date Functions
     
-    private func GetTransactionsAndGroups() {
+    internal func getTransactionsAndGroups() {
         guard let newContext = context else { return }
         
         do {
@@ -165,5 +170,9 @@ extension MainViewController {
         }
     }
     
-    
+    func dismissal() {
+        
+        
+        
+    }
 }

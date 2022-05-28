@@ -19,6 +19,7 @@ class FinancialsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         addSubview(tableView)
         addConstraints()
         
@@ -28,6 +29,7 @@ class FinancialsTableViewCell: UITableViewCell {
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 1
         tableView.separatorStyle = .none
+        
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -62,7 +64,6 @@ extension FinancialsTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
         let cell = FinancialDetailTableViewCell()
         cell.selectionStyle = .none
         cell.layer.borderWidth = 0.5

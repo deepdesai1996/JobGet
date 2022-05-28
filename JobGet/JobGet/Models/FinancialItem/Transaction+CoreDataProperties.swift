@@ -19,7 +19,7 @@ extension Transaction {
     @NSManaged public var itemType: Bool
     @NSManaged public var itemValue: Double
     @NSManaged public var itemDescription: String?
-    @NSManaged public var itemDate: Date?
+    @NSManaged public var itemDate: String?
 
 }
 

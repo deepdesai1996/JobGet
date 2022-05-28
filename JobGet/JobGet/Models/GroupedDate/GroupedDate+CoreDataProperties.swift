@@ -16,7 +16,7 @@ extension GroupedDate {
         return NSFetchRequest<GroupedDate>(entityName: "GroupedDate")
     }
 
-    @NSManaged public var date: Date?
+    @NSManaged public var date: String?
 
 }
 

@@ -8,11 +8,17 @@
 import Foundation
 import UIKit
 
+protocol DismissalDelegate {
+    func dismissal()
+}
+
 class TransactionViewController: UIViewController {
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private var groupedDateModels = [GroupedDate]()
     private var transactionType: Bool = true
+    internal var dismissalDelegate: DismissalDelegate?
+    internal var parentVC: MainViewController?
     
     private let container: UIView = {
         let view = UIView()
@@ -172,6 +178,7 @@ class TransactionViewController: UIViewController {
         transactionDropdown.dropView.dropDownOptions.append("Expense")
         transactionDropdown.dropView.dropDownOptions.append("Income")
     }
+
     
     @objc func inputTransaction(sender: UIButton){
         
@@ -184,11 +191,22 @@ class TransactionViewController: UIViewController {
         }
         
         let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        let formattedDate = format.string(from: date)
         
-        createTransaction(itemType: transactionType, itemDescription: transactionDescription.text ?? tDescription, itemValue: tValue, itemDate: date)
         
-        self.dismiss(animated: true)
+        createTransaction(itemType: transactionType, itemDescription: tDescription, itemValue: tValue, itemDate: formattedDate)
+        
+        self.dismiss(animated: true, completion: {
+            self.dismissalDelegate?.dismissal()
+        })
     }
+    
+    func setParent(parentVC: MainViewController){
+        self.parentVC = parentVC
+    }
+    
 }
 
 extension TransactionViewController {
@@ -207,19 +225,42 @@ extension TransactionViewController {
         
     }
     
-    func createTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: Date) {
+    func createTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: String) {
+        addGroupDate(itemDate: itemDate)
+        addTransaction(itemType: itemType, itemDescription: itemDescription, itemValue: itemValue, itemDate: itemDate)
+    }
+    
+    
+    func addGroupDate(itemDate: String) {
+        getDateGroups()
         
         guard let newContext = context else { return }
-        
-        for groupedDates in groupedDateModels {
+        let newGroupedDate = GroupedDate(context: newContext)
+      
+        if groupedDateModels.isEmpty {
             
-            if groupedDates.date != itemDate {
-                let newGroupedDate = GroupedDate(context: newContext)
+            newGroupedDate.date = itemDate
+        } else {
+            
+            if !self.containsDate(date: itemDate) {
                 newGroupedDate.date = itemDate
+                do {
+                    try newContext.save()
+                    
+                } catch {
+                    print("Unable to create new item: \(error)")
+                }
             }
         }
         
-        
+    }
+    
+    func containsDate(date: String) -> Bool {
+        groupedDateModels.compactMap(\.date).contains(date)
+    }
+    
+    func addTransaction(itemType: Bool, itemDescription: String, itemValue: Double, itemDate: String){
+        guard let newContext = context else { return }
         
         let newTransaction = Transaction(context: newContext)
         
@@ -234,10 +275,10 @@ extension TransactionViewController {
         
         newTransaction.itemDate = itemDate
         
-        
-        
         do {
             try newContext.save()
+            parentVC?.getTransactionsAndGroups()
+            getDateGroups()
         } catch {
             print("Unable to create new item: \(error)")
         }

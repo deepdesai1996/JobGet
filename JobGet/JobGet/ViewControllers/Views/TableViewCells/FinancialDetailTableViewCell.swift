@@ -39,7 +39,6 @@ class FinancialDetailTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            //titleLabel.trailingAnchor.constraint(equalTo: secondaryLabel.leadingAnchor)
         ])
         
         NSLayoutConstraint.activate([
